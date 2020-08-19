@@ -1,0 +1,256 @@
+body {
+    min-width: 320px
+}
+
+ul,
+ol,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+th,
+td,
+div {
+    margin: 0;
+    padding: 0;
+}
+
+/*fieldset,
+		img {
+			border: 0
+		}*/
+ol,
+ul,
+li {
+    list-style: none;
+}
+
+ins,
+a {
+    text-decoration: none;
+}
+
+a:focus {
+    outline: none;
+}
+
+.clear {
+    clear: both;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+/* base */
+textarea {
+    resize: vertical;
+}
+
+/*上面是首页中分布统计的样式表*/
+.treeSelectDiv {
+    display: none;
+    position: absolute;
+    z-index: 9998;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, .15);
+    background-color: #fff;
+    margin-top: 10px;
+    min-width: 300px;
+    max-width: 300px;
+}
+
+.add_search_param .treeSelectDiv {
+    margin-top: 0px;
+}
+
+.add_search_param > input, .add_search_param > select, .add_search_param > div {
+    margin-right: 8px;
+}
+
+.treeSelectDiv ul.ztree {
+    margin-top: -10px;
+}
+
+.add_search_param .treeSelectDiv ul.ztree {
+    margin-top: 0px;
+}
+
+.treeSelectDiv:before, .treeSelectDiv:after {
+    position: absolute;
+    display: inline-block;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    content: '';
+}
+
+.treeSelectDiv:before {
+    top: -7px;
+    border-right: 7px solid transparent;
+    border-left: 7px solid transparent;
+    border-bottom: 7px solid #ccc;
+    left: 8px;
+}
+
+.treeSelectDiv:after {
+    top: -6px;
+    border-right: 6px solid transparent;
+    border-bottom: 7px solid #fff;
+    border-left: 7px solid transparent;
+    left: 8px;
+}
+
+table.dataTable tbody tr.selected {
+    background-color: #b0bed9;
+}
+
+.mask_div {
+    left: 0;
+    top: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+    z-index: 9998;
+    display: block;
+    background: #ccc;
+    display: none;
+    filter: alpha(opacity=30);
+}
+
+.shining_loading {
+    width: 160px;
+    height: 56px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    line-height: 56px;
+    color: #fff;
+    padding-left: 60px;
+    font-size: 15px;
+    background: #000 url(/Content/img/Loading.gif) no-repeat 10px 50%;
+    opacity: 0.7;
+    z-index: 9999;
+    display: none;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+
+.down-input {
+    padding-right: 15px;
+    background: url("/Content/img/down.png") no-repeat scroll right center transparent;
+}
+
+.leftDiv {
+    float: left;
+}
+
+.pageOutDiv {
+    height: 30px;
+}
+
+.pageLength {
+    float: left;
+    margin-top: 5px;
+}
+
+.selected_terminal_group {
+    background-color: #777;
+}
+
+.monitor_ul li span {
+    line-height: 16px;
+    margin-right: 2px;
+}
+
+.monitor_ul li span.postion_checkbox {
+    line-height: 0;
+    margin: 0;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    border: 0 none;
+    cursor: pointer;
+    outline: none;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-image: url("./ztree/zTreeStyle/img/zTreeStandard.png");
+    *background-image: url("./ztree/zTreeStyle/img/zTreeStandard.gif");
+}
+
+.monitor_ul li span.postion_checkbox {
+    width: 13px;
+    height: 13px;
+    margin: 0 3px 0 0;
+}
+
+.monitor_ul li span.postion_checkbox.checkbox_false_full { /* background-position:0 0 */
+}
+
+.monitor_ul li span.postion_checkbox.checkbox_false_full:hover {
+    background-position: 0 -14px;
+}
+
+.monitor_ul li span.postion_checkbox.checkbox_false_part {
+    background-position: 0 -28px;
+}
+
+.monitor_ul li span.postion_checkbox.checkbox_false_part:hover {
+    background-position: 0 -42px;
+}
+
+.monitor_ul li span.postion_checkbox.checkbox_false_disable {
+    background-position: 0 -56px;
+}
+
+.monitor_ul li span.postion_checkbox.checkbox_true_full {
+    background-position: -14px 0;
+}
+
+.monitor_ul li span.postion_checkbox.checkbox_true_full:hover {
+    background-position: -14px -14px;
+}
+
+.monitor_ul li span.postion_checkbox.checkbox_true_part {
+    background-position: -14px -28px;
+}
+
+.monitor_ul li span.postion_checkbox.checkbox_true_part:hover {
+    background-position: -14px -42px;
+}
+
+.monitor_ul li span.postion_checkbox.checkbox_true_disable {
+    background-position: -14px -56px;
+}
+
+@media (min-width: 768px) {
+    .sidebar-mini.sidebar-collapse .main-header .navbar {
+        margin-left: 170px !important;
+    }
+
+    .sidebar-mini.sidebar-collapse .main-header .logo {
+        width: 170px !important;
+    }
+
+    .sidebar-mini.sidebar-collapse .main-header .logo > .logo-lg {
+        display: block !important;
+    }
+}

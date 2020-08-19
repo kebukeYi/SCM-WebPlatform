@@ -1,0 +1,19 @@
+[{
+  "alarm_type_id": "8",
+  "alarm_type": "出围栏报警",
+  "alarm_num": "4",
+  "send_time": "1582604642",
+  "user_name": "760"
+}, {
+  "alarm_type_id": "22",
+  "alarm_type": "进入盲区报警",
+  "alarm_num": "1",
+  "send_time": "1582074714",
+  "user_name": "goome-32115刘中军"
+}, {
+  "alarm_type_id": "23",
+  "alarm_type": "离开盲区报警",
+  "alarm_num": "1",
+  "send_time": "1582075649",
+  "user_name": "goome-32115刘中军"
+}]

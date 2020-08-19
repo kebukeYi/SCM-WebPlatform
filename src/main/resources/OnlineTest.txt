@@ -1,0 +1,31 @@
+
+根据用户名字：唐山朴能环保科技有限公司   分出->   组：唐山市 ； 目录：朴能环保科技有限公司；
+根据围栏数据：118.18503856658936|39.69396263878166,4690.0   绑定 用户/组/目录/设备
+根据设备数据：
+Lng: 118.167168
+Lat: 39.646874
+DeviceNumber: "161117090700009"
+DeviceName: "S110009"
+Status: "NotDisassembly, Normal"
+Alarm: "Out"
+StopTime: null
+ReceiveTime: "2020-03-19T19:00:31.667"
+LocationTime: "2020-03-19T19:00:31.667"
+LocationType: 0
+Online: false
+Direct: 0
+Electricity: 93
+Satellites: 0
+Signal: 100
+Speed: 0
+ModelType: 1
+Mileage: 0
+OuterVoltage: null
+
+插入库 👇👇👇
+UserOrg{user_id='1584671979279729865',userName='唐山朴能环保科技有限公司', orgnizationIds='["1584671979279219847"]', catalogueIds='["1584671979279511096"]', fence_ids='["1584671979279184206"]', password='123456', statInfo='[]', distributions='[]'}
+Organization{organization_id='1584671979279219847', parent_id='1584671979279729865', organization_name='唐山市', catalogue_ids='["1584671979279511096"]', fence_ids='["1584671979279184206"]', group_fence_ids='[]', group_fence_alarm_type='[]', group_bind_time='[]'}
+Catalog{catalog_id='1584671979279511096', parent_id='1584671979279219847', device_ids='["161117090700009"]', fence_ids='["1584671979279184206"]', group_fence_ids='[]', group_fence_alarm_type='[]', group_fence_alarm_type_text='null', group_bind_time='[]'}
+Fence{Id='1584671979279184206', FenceType=1, FenceTypeText='圆形', UserId='1584671979279729865', OrganizationIds='["1584671979279219847"]', CatalogueIds='["1584671979279511096"]'}
+result : {"formatted_address":"河北省唐山市路北区机场路","business":"机场路,兴源道,煤医道","sematic_description":"","cityCode":265,"roads":[],"location":{"lng":118.17998164005532,"lat":39.65428194584054},"poiRegions":[],"pois":[],"addressComponent":{"city_level":2,"country":"中国","town":"","distance":"","city":"唐山市","adcode":"130203","country_code_iso":"CHN","country_code_iso2":"CN","country_code":0,"town_code":"","province":"河北省","street":"机场路","district":"路北区","street_number":"","direction":""}}
+AndroidMonitorTip{aliase='S110009', dev_number='161117090700009', province='河北省', city='唐山市', address='河北省唐山市路北区机场路', model_id='25', model_type='1', online=false, attention=true, disabled=false, activation=true, bind_fence=true, bind_time='["2020-03-20T10:39:39"]', efence_support=true, user_id='1584671979279729865', group_id='1584671979279219847', group_name='唐山市', catalogue_id='1584671979279511096', cata_name='朴能环保科技有限公司', fence_id='["1584671979279184206"]', fence_alarm_type='["1"]', receive_time='2020-03-19T19:03:46.693', location_type='0', last_update_time='2020-03-19T19:03:46.693'}

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.car.mapper.OnlineReportMapper">
+
+
+    <select id="queryAll" parameterType="map" resultType="com.car.domain.OnlineReport">
+        select* from online_report
+
+        <where>
+
+            <if test="Key!=null">
+                dev_number=#{Key}
+            </if>
+
+            <if test="userId!=null">
+                and user_id=#{userId}
+            </if>
+
+            <if test="OrgId!=null">
+                and group_id=#{OrgId}
+            </if>
+
+            <if test="CataId!=null">
+                and catalogue_id=#{CataId}
+            </if>
+
+            <if test="UserId!=null">
+                and user_id=#{UserId}
+            </if>
+
+
+            <if test="ModeId!=null and ModeId!='' ">
+                and model_id=#{ModeId}
+            </if>
+
+            <if test="ModelType!=null and ModelType!='' ">
+                and model_type=#{ModelType}
+            </if>
+
+            <if test="Days!=null and Days!='' ">
+                and days>#{Days}
+            </if>
+        </where>
+        limit #{start},#{limit}
+    </select>
+
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="com.car.domain.OnlineReports">
+        insert into bdswebplatform.online_report(group_id,user_id,offline_second, group_name, dev_name, dev_number, model_type, model_id,model_name, model_type_name, cata_name, lng, lat, lnglat, location_time, receive_time)
+        values (#{group_id}, #{user_id},#{offline_second}, #{group_name}, #{dev_name}, #{dev_number}, #{model_type},#{model_id}, #{model_name}, #{model_type_name}, #{cata_name}, #{lng}, #{lat}, #{lnglat}, #{location_time}, #{receive_time})
+    </insert>
+
+    <insert id="insertForeach" parameterType="java.util.List" useGeneratedKeys="true">
+        insert into bdswebplatform.online_report(group_id,user_id, offline_second, group_name, dev_name, dev_number,
+        model_type,
+        model_id,model_name, model_type_name, catalogue_id,cata_name, lng, lat, lnglat,location_time, receive_time)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.group_id},
+            #{item.user_id},
+            #{item.offline_second},
+            #{item.group_name},
+            #{item.dev_name},
+            #{item.dev_number},
+            #{item.model_type},
+            #{item.model_id},
+            #{item.model_name},
+            #{item.model_type_name},
+            #{item.catalogue_id},
+            #{item.cata_name},
+            #{item.lng},
+            #{item.lat},
+            #{item.lnglat},
+            #{item.location_time},
+            #{item.receive_time}
+            )
+        </foreach>
+    </insert>
+
+    <update id="update">
+        update bdswebplatform.online_report
+        <set>
+            <if test="groupId != null and groupId != ''">
+                group_id = #{groupId},
+            </if>
+            <if test="offlineSecond != null and offlineSecond != ''">
+                offline_second = #{offlineSecond},
+            </if>
+            <if test="groupName != null and groupName != ''">
+                group_name = #{groupName},
+            </if>
+            <if test="devName != null and devName != ''">
+                dev_name = #{devName},
+            </if>
+            <if test="devNumber != null and devNumber != ''">
+                dev_number = #{devNumber},
+            </if>
+            <if test="devTypeId != null and devTypeId != ''">
+                dev_type_id = #{devTypeId},
+            </if>
+            <if test="modelName != null and modelName != ''">
+                model_name = #{modelName},
+            </if>
+            <if test="modelTypeName != null and modelTypeName != ''">
+                model_type_name = #{modelTypeName},
+            </if>
+            <if test="cataName != null and cataName != ''">
+                cata_name = #{cataName},
+            </if>
+            <if test="lng != null and lng != ''">
+                lng = #{lng},
+            </if>
+            <if test="lat != null and lat != ''">
+                lat = #{lat},
+            </if>
+            <if test="lnglat != null and lnglat != ''">
+                lnglat = #{lnglat},
+            </if>
+            <if test="lastLocationTime != null and lastLocationTime != ''">
+                last_location_time = #{lastLocationTime},
+            </if>
+            <if test="receiveTime != null and receiveTime != ''">
+                receive_time = #{receiveTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from bdswebplatform.online_report where id = #{id}
+    </delete>
+
+</mapper>

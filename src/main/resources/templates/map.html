@@ -1,0 +1,242 @@
+﻿<!DOCTYPE html>
+<html style="width:100%;height: 100%;">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <title>Map</title>
+    <link href="/Content/bootstrap.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/common.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/bootstrapValidator.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/font-awesome.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/css/AdminLTE.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/jquery-confirm.min.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/css/skins/_all-skins.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/ztree/zTreeStyle/zTreeStyle.css?1.0.17.014" rel="stylesheet" type="text/css">
+    <link href="/Content/buttons.dataTables.min.css?1.0.17.014" rel="stylesheet" type="text/css">
+    <link href="/Content/dataTables.bootstrap.min.css?1.0.17.014" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/Content/map/map.css?1.0.17.014" type="text/css">
+    <style>
+        #mmap label {
+            max-width: none;
+        }
+
+        .d_line_marker#marker {
+            position: fixed;
+            background: rgba(0, 0, 0, 0.5);
+            height: 100%;
+            width: 100%;
+            z-index: 10000 !important;
+            display: none;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .d_line_marker .line_details .line_date li {
+            float: left;
+            text-align: center;
+            width: 120px;
+            font-size: 16px;
+            font-family: 'Microsoft YaHei';
+            padding: 10px 0px;
+        }
+
+        .d_line_marker .line_details {
+            width: 800px;
+            background: #fff;
+            margin: 0 auto;
+            padding-bottom: 10px;
+            margin-top: 150px;
+        }
+
+        .d_line_marker .line_details ul {
+            padding: 10px 0px 10px 20px;
+        }
+
+        .d_line_marker .line_details .line_date span {
+            width: 60px;
+            height: 30px;
+            line-height: 30px;
+            font-family: 'Microsoft YaHei';
+            font-size: 18px;
+            display: block;
+            margin: 0 auto;
+            cursor: pointer;
+            background: #eee;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .d_line_marker .line_details h2 {
+            padding: 10px 0px 10px 5px;
+            font-size: 20px;
+            border-bottom: #eee solid 1px;
+        }
+
+        .table_map > div {
+            display: block;
+        }
+
+        .table_map > div:last-child {
+            display: block;
+        }
+
+        .table_map #d_inforwidown {
+            display: block;
+            padding: 10px 0px 0px 0px;
+            border-top: solid 2px #3c8dbc;
+            padding-top: 5px;
+        }
+
+        .table_map #d_inforwidown span {
+            padding: 0;
+            background: #ffffff;
+            border: none;
+            margin-left: 0;
+            color: #3c8dbc;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .d_qt {
+            position: absolute;
+            z-index: 99999;
+            right: -32px;
+            padding: 5px 5px 5px 5px;
+            background: #fff;
+            bottom: 24px;
+            border-radius: 3px;
+            box-shadow: 2px 0px 20px darkgrey;
+            display: none;
+        }
+
+        .d_qt span {
+            display: block;
+            padding-bottom: 5px;
+            margin-right: 0px !important;
+        }
+
+        .sendbody .container input {
+            padding: 0;
+            height: 22px;
+            width: 20px;
+            border: none;
+            border: solid 1px #ccc;
+            background: #eee;
+            border-radius: 2px;
+            margin-left: 5px;
+        }
+
+        .sendbody .container .timeSelect {
+            margin-bottom: 5px;
+        }
+
+        .sendbody .form-group {
+            margin-bottom: 10px;
+        }
+
+        .BMap_pop > div:nth-child(9) {
+            overflow: visible !important;
+        }
+
+        .BMap_bubble_content .singl {
+            top: 2px !important;
+            right: 18px !important;
+        }
+
+        .BMap_bubble_content .electric {
+            top: 2px !important;
+            right: 36px !important;
+        }
+
+        .BMap_bubble_content .d_qt {
+            right: -50px;
+            bottom: -14px;
+        }
+    </style>
+    <script src="/Scripts/app/ip.js"></script>
+    <script src="/Scripts/jquery-1.10.2.min.js?1.0.17.014"></script>
+    <script src="http://webapi.amap.com/maps?v=1.4.6&amp;key=77ad5ff40bcc2c50468a4d502445d2b6"></script>
+    <script src="/Scripts/monitor/amap.js?1.0.17.014"></script>
+    <script type="text/javascript">
+        var mapObj, markers = {};
+        $(function () {
+            // alert("到达地图控件");
+            //地图初始化===Start
+            mapObj = new wrt.mapClass({
+                'id': 'mmap',
+                'isOffSet': true,
+                'onTipsUpdated': function (mObj, p) {
+                    mObj.getAddress(p, function (a) {
+                        $('.table_map .info_Address').html(a);
+                    });
+                }
+            });
+
+            mapObj.setCenter({
+                lng: top['centerlng'] || 114.087388,
+                lat: top['centerlat'] || 22.546990
+            }, top['czoom'] || 10);
+
+            //地图初始化===End
+
+            for (var deviceNumber in top.cars) {
+                updateMarker(deviceNumber, top.cars[deviceNumber]);
+            }
+
+        });
+
+        function updateMarker(deviceNumber, o) {
+            if (markers[deviceNumber]) {
+                mapObj.updateMarker(markers[deviceNumber], o);
+            } else {
+                markers[deviceNumber] = mapObj.addMarker(o);
+                mapObj.addMarkerClickEvent(markers[deviceNumber]);
+            }
+        }
+
+        function removeMarker(deviceNumber) {
+            if (markers[deviceNumber]) {
+                mapObj.removeMarker(markers[deviceNumber]);
+                delete markers[deviceNumber];
+            }
+        }
+
+        function setCenter(deviceNumber, o) {
+            if (markers[deviceNumber]) {
+                mapObj.setCenter(o.position);
+                mapObj.showTips(markers[deviceNumber]);
+            }
+        }
+
+        function getView() {
+            var v = mapObj.getCenter(); //返回地图中心点经纬度坐标
+            v.z = mapObj.getZoom();
+            return v;
+        }
+
+        function enableDistance() {
+            mapObj.enableDistance();
+        }
+
+        function addCircle(lng, lat, radius, name) {
+            return mapObj.addCircle(lng, lat, radius, name);
+        }
+
+        function showAdminArea(adcode, type) {
+            return mapObj.showAdminArea(adcode, type);
+        }
+
+        function clearFigure(obj) {
+            return mapObj.clearFigure(obj);
+        }
+
+    </script>
+</head>
+<body style="margin:0;width:100%;height:100%;">
+<div id="mmap" style="width:100%;height:100%;">
+</div>
+</body>
+</html>

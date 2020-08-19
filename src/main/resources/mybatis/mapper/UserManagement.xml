@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.car.mapper.UserManagementMapper">
+
+    <!--查询-->
+    <select id="getUserByMap" parameterType="map" resultType="com.car.bean.UserOrg">
+        select * from user
+        <where>
+
+            <if test="Key!=null">
+                dev_number=#{Key}
+            </if>
+
+            <if test="OrgId!=null">
+                and group_id=#{OrgId}
+            </if>
+
+            <if test="CataId!=null">
+                and catalogue_id=#{CataId}
+            </if>
+
+            <if test="userId!=null">
+                and user_id=#{userId}
+            </if>
+
+            <if test="AlarmType!=null and AlarmType!='' ">
+                and alarm_type_id=#{AlarmType}
+            </if>
+
+            <if test="ModelType!=null and ModelType!='' ">
+                and model_type=#{ModelType}
+            </if>
+
+            <if test="StartTime!=null and EndTime!=null">
+                and alarm_time <![CDATA[>]]> #{StartTime} and alarm_time  <![CDATA[<]]>  #{EndTime}
+            </if>
+
+        </where>
+        limit #{start},#{limit}
+    </select>
+
+    <!--插入-->
+    <insert id="insertUser" parameterType="map">
+        insert into bdswebplatform.alarm_report(group_id, offline_second, group_name, dev_name, dev_number, model_type, cata_name, lng, lat, lnglat, location_time, receive_time)
+        values (#{group_id}, #{offline_second}, #{group_name}, #{dev_name}, #{dev_number}, #{model_type},#{cata_name}, #{lng}, #{lat}, #{lnglat}, #{location_time}, #{receive_time})
+
+
+    </insert>
+
+    <insert id="insertUserForEach" parameterType="java.util.List" useGeneratedKeys="true">
+        insert into bdswebplatform.alarm_report(group_id, user_id, group_name, dev_name, dev_number,
+        cata_name,catalogue_id, lng, lat, lnglat, alarm_time,alarm_type_id,alarm_text,content,receive_time,model_type)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.group_id},
+            #{item.user_id},
+            #{item.group_name},
+            #{item.dev_name},
+            #{item.dev_number},
+            #{item.cata_name},
+            #{item.catalogue_id},
+            #{item.lng},
+            #{item.lat},
+            #{item.lnglat},
+            #{item.alarm_time},
+            #{item.alarm_type_id},
+            #{item.alarm_text},
+            #{item.content},
+            #{item.receive_time},
+            #{item.,model_type}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="delUserById">
+    delete from car where id=#{id}
+    </delete>
+
+    <update id="updateUser">
+
+    </update>
+
+
+</mapper>

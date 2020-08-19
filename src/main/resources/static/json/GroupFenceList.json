@@ -1,0 +1,92 @@
+[{
+  "OrgId": "9f3d2691-e76e-48b6-a45a-ab0a011ffacf",
+  "OrgName": "C181119",
+  "ParentName": "C18",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "OrgId": "bb765b00-4d60-4de0-aebd-aaea00b7f809",
+  "OrgName": "C181018",
+  "ParentName": "C18",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "OrgId": "41f6a744-2a59-479b-b1dd-aa9b011ec7c2",
+  "OrgName": "C180731",
+  "ParentName": "C18",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "OrgId": "004074e3-a552-454e-8868-a9bc01208615",
+  "OrgName": "WRT2018121200179",
+  "ParentName": "C18",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "OrgId": "ec411941-3faf-4844-a5f1-a94700bdf677",
+  "OrgName": "C18-JT 20台",
+  "ParentName": "C18",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "OrgId": "e9ddf59f-d410-4881-958e-a8e100a96e6a",
+  "OrgName": "S17050515",
+  "ParentName": "C18",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "OrgId": "4b0278b8-933e-41a8-a3cd-a8dc013c23dd",
+  "OrgName": "WRT201805100179",
+  "ParentName": "C18",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "OrgId": "8fb5d276-0ce6-47ba-82b7-a87700be4053",
+  "OrgName": "WRT201801240147",
+  "ParentName": "C18",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "OrgId": "8cf9857e-3f95-43e5-b7b4-a86701512cce",
+  "OrgName": "WRT2018011300006",
+  "ParentName": "C18",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "OrgId": "1a0c434c-4386-414d-ae29-a82700fac16b",
+  "OrgName": "WRT2017110900035",
+  "ParentName": "C18",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "OrgId": "70e67992-ddc1-4b81-a9be-a82301207e3c",
+  "OrgName": "C181106",
+  "ParentName": "C18",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "OrgId": "168c3200-a1dd-473c-9d30-a8230120604d",
+  "OrgName": "C18",
+  "ParentName": "产线测试组",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "OrgId": "b738ab5d-9197-4e74-be8a-a7fd00a54e72",
+  "OrgName": "C180929",
+  "ParentName": "C18",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}]

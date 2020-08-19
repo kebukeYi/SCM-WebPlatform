@@ -1,0 +1,161 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+<!--<mapper namespace=".dao.CarDao">-->
+
+<!--    <resultMap type=".entity.Car" id="CarMap">-->
+<!--        <result property="id" column="id" jdbcType="INTEGER"/>-->
+<!--        <result property="userId" column="user_id" jdbcType="INTEGER"/>-->
+<!--        <result property="groupId" column="group_id" jdbcType="VARCHAR"/>-->
+<!--        <result property="groupName" column="group_name" jdbcType="VARCHAR"/>-->
+<!--        <result property="catalogueId" column="catalogue_id" jdbcType="VARCHAR"/>-->
+<!--        <result property="carname" column="carName" jdbcType="VARCHAR"/>-->
+<!--        <result property="plateno" column="PlateNo" jdbcType="VARCHAR"/>-->
+<!--        <result property="vin" column="VIN" jdbcType="VARCHAR"/>-->
+<!--        <result property="carcolor" column="CarColor" jdbcType="VARCHAR"/>-->
+<!--        <result property="cartype" column="CarType" jdbcType="VARCHAR"/>-->
+<!--        <result property="brand" column="Brand" jdbcType="VARCHAR"/>-->
+<!--        <result property="model" column="Model" jdbcType="VARCHAR"/>-->
+<!--        <result property="owner" column="Owner" jdbcType="VARCHAR"/>-->
+<!--        <result property="phone" column="Phone" jdbcType="VARCHAR"/>-->
+<!--        <result property="zipdevicemodels" column="ZipDeviceModels" jdbcType="VARCHAR"/>-->
+<!--        <result property="remark" column="Remark" jdbcType="VARCHAR"/>-->
+<!--    </resultMap>-->
+
+<!--    &lt;!&ndash;查询单个&ndash;&gt;-->
+<!--    <select id="queryById" resultMap="CarMap">-->
+<!--        select-->
+<!--          id, user_id, group_id, group_name, catalogue_id, carName, PlateNo, VIN, CarColor, CarType, Brand, Model, Owner, Phone, ZipDeviceModels, Remark-->
+<!--        from bdswebplatform.car-->
+<!--        where id = #{id}-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash;查询指定行数据&ndash;&gt;-->
+<!--    <select id="queryAllByLimit" resultMap="CarMap">-->
+<!--        select-->
+<!--          id, user_id, group_id, group_name, catalogue_id, carName, PlateNo, VIN, CarColor, CarType, Brand, Model, Owner, Phone, ZipDeviceModels, Remark-->
+<!--        from bdswebplatform.car-->
+<!--        limit #{offset}, #{limit}-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash;通过实体作为筛选条件查询&ndash;&gt;-->
+<!--    <select id="queryAll" resultMap="CarMap">-->
+<!--        select-->
+<!--          id, user_id, group_id, group_name, catalogue_id, carName, PlateNo, VIN, CarColor, CarType, Brand, Model, Owner, Phone, ZipDeviceModels, Remark-->
+<!--        from bdswebplatform.car-->
+<!--        <where>-->
+<!--            <if test="id != null">-->
+<!--                and id = #{id}-->
+<!--            </if>-->
+<!--            <if test="userId != null">-->
+<!--                and user_id = #{userId}-->
+<!--            </if>-->
+<!--            <if test="groupId != null and groupId != ''">-->
+<!--                and group_id = #{groupId}-->
+<!--            </if>-->
+<!--            <if test="groupName != null and groupName != ''">-->
+<!--                and group_name = #{groupName}-->
+<!--            </if>-->
+<!--            <if test="catalogueId != null and catalogueId != ''">-->
+<!--                and catalogue_id = #{catalogueId}-->
+<!--            </if>-->
+<!--            <if test="carname != null and carname != ''">-->
+<!--                and carName = #{carname}-->
+<!--            </if>-->
+<!--            <if test="plateno != null and plateno != ''">-->
+<!--                and PlateNo = #{plateno}-->
+<!--            </if>-->
+<!--            <if test="vin != null and vin != ''">-->
+<!--                and VIN = #{vin}-->
+<!--            </if>-->
+<!--            <if test="carcolor != null and carcolor != ''">-->
+<!--                and CarColor = #{carcolor}-->
+<!--            </if>-->
+<!--            <if test="cartype != null and cartype != ''">-->
+<!--                and CarType = #{cartype}-->
+<!--            </if>-->
+<!--            <if test="brand != null and brand != ''">-->
+<!--                and Brand = #{brand}-->
+<!--            </if>-->
+<!--            <if test="model != null and model != ''">-->
+<!--                and Model = #{model}-->
+<!--            </if>-->
+<!--            <if test="owner != null and owner != ''">-->
+<!--                and Owner = #{owner}-->
+<!--            </if>-->
+<!--            <if test="phone != null and phone != ''">-->
+<!--                and Phone = #{phone}-->
+<!--            </if>-->
+<!--            <if test="zipdevicemodels != null and zipdevicemodels != ''">-->
+<!--                and ZipDeviceModels = #{zipdevicemodels}-->
+<!--            </if>-->
+<!--            <if test="remark != null and remark != ''">-->
+<!--                and Remark = #{remark}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash;新增所有列&ndash;&gt;-->
+<!--    <insert id="insert" keyProperty="id" useGeneratedKeys="true">-->
+<!--        insert into bdswebplatform.car(user_id, group_id, group_name, catalogue_id, carName, PlateNo, VIN, CarColor, CarType, Brand, Model, Owner, Phone, ZipDeviceModels, Remark)-->
+<!--        values (#{userId}, #{groupId}, #{groupName}, #{catalogueId}, #{carname}, #{plateno}, #{vin}, #{carcolor}, #{cartype}, #{brand}, #{model}, #{owner}, #{phone}, #{zipdevicemodels}, #{remark})-->
+<!--    </insert>-->
+
+<!--    &lt;!&ndash;通过主键修改数据&ndash;&gt;-->
+<!--    <update id="update">-->
+<!--        update bdswebplatform.car-->
+<!--        <set>-->
+<!--            <if test="userId != null">-->
+<!--                user_id = #{userId},-->
+<!--            </if>-->
+<!--            <if test="groupId != null and groupId != ''">-->
+<!--                group_id = #{groupId},-->
+<!--            </if>-->
+<!--            <if test="groupName != null and groupName != ''">-->
+<!--                group_name = #{groupName},-->
+<!--            </if>-->
+<!--            <if test="catalogueId != null and catalogueId != ''">-->
+<!--                catalogue_id = #{catalogueId},-->
+<!--            </if>-->
+<!--            <if test="carname != null and carname != ''">-->
+<!--                carName = #{carname},-->
+<!--            </if>-->
+<!--            <if test="plateno != null and plateno != ''">-->
+<!--                PlateNo = #{plateno},-->
+<!--            </if>-->
+<!--            <if test="vin != null and vin != ''">-->
+<!--                VIN = #{vin},-->
+<!--            </if>-->
+<!--            <if test="carcolor != null and carcolor != ''">-->
+<!--                CarColor = #{carcolor},-->
+<!--            </if>-->
+<!--            <if test="cartype != null and cartype != ''">-->
+<!--                CarType = #{cartype},-->
+<!--            </if>-->
+<!--            <if test="brand != null and brand != ''">-->
+<!--                Brand = #{brand},-->
+<!--            </if>-->
+<!--            <if test="model != null and model != ''">-->
+<!--                Model = #{model},-->
+<!--            </if>-->
+<!--            <if test="owner != null and owner != ''">-->
+<!--                Owner = #{owner},-->
+<!--            </if>-->
+<!--            <if test="phone != null and phone != ''">-->
+<!--                Phone = #{phone},-->
+<!--            </if>-->
+<!--            <if test="zipdevicemodels != null and zipdevicemodels != ''">-->
+<!--                ZipDeviceModels = #{zipdevicemodels},-->
+<!--            </if>-->
+<!--            <if test="remark != null and remark != ''">-->
+<!--                Remark = #{remark},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        where id = #{id}-->
+<!--    </update>-->
+
+<!--    &lt;!&ndash;通过主键删除&ndash;&gt;-->
+<!--    <delete id="deleteById">-->
+<!--        delete from bdswebplatform.car where id = #{id}-->
+<!--    </delete>-->
+
+<!--</mapper>-->

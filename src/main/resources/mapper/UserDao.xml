@@ -1,0 +1,168 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+<!--<mapper namespace=".dao.UserDao">-->
+
+<!--    <resultMap type=".entity.User" id="UserMap">-->
+<!--        <result property="id" column="id" jdbcType="INTEGER"/>-->
+<!--        <result property="userId" column="user_id" jdbcType="INTEGER"/>-->
+<!--        <result property="imgname" column="imgName" jdbcType="VARCHAR"/>-->
+<!--        <result property="orgname" column="orgName" jdbcType="VARCHAR"/>-->
+<!--        <result property="username" column="userName" jdbcType="VARCHAR"/>-->
+<!--        <result property="parentid" column="parentId" jdbcType="VARCHAR"/>-->
+<!--        <result property="parentname" column="parentName" jdbcType="VARCHAR"/>-->
+<!--        <result property="roleorgmodels" column="roleOrgModels" jdbcType="VARCHAR"/>-->
+<!--        <result property="roleName" column="role_name" jdbcType="VARCHAR"/>-->
+<!--        <result property="password" column="password" jdbcType="VARCHAR"/>-->
+<!--        <result property="phone" column="phone" jdbcType="VARCHAR"/>-->
+<!--        <result property="createtime" column="createTime" jdbcType="VARCHAR"/>-->
+<!--        <result property="email" column="email" jdbcType="VARCHAR"/>-->
+<!--        <result property="disable" column="disable" jdbcType="VARCHAR"/>-->
+<!--        <result property="enabledtext" column="EnabledText" jdbcType="VARCHAR"/>-->
+<!--        <result property="seq" column="seq" jdbcType="VARCHAR"/>-->
+<!--        <result property="remark" column="Remark" jdbcType="VARCHAR"/>-->
+<!--    </resultMap>-->
+
+<!--    &lt;!&ndash;查询单个&ndash;&gt;-->
+<!--    <select id="queryById" resultMap="UserMap">-->
+<!--        select-->
+<!--          id, user_id, imgName, orgName, userName, parentId, parentName, roleOrgModels, role_name, password, phone, createTime, email, disable, EnabledText, seq, Remark-->
+<!--        from bdswebplatform.user-->
+<!--        where id = #{id}-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash;查询指定行数据&ndash;&gt;-->
+<!--    <select id="queryAllByLimit" resultMap="UserMap">-->
+<!--        select-->
+<!--          id, user_id, imgName, orgName, userName, parentId, parentName, roleOrgModels, role_name, password, phone, createTime, email, disable, EnabledText, seq, Remark-->
+<!--        from bdswebplatform.user-->
+<!--        limit #{offset}, #{limit}-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash;通过实体作为筛选条件查询&ndash;&gt;-->
+<!--    <select id="queryAll" resultMap="UserMap">-->
+<!--        select-->
+<!--          id, user_id, imgName, orgName, userName, parentId, parentName, roleOrgModels, role_name, password, phone, createTime, email, disable, EnabledText, seq, Remark-->
+<!--        from bdswebplatform.user-->
+<!--        <where>-->
+<!--            <if test="id != null">-->
+<!--                and id = #{id}-->
+<!--            </if>-->
+<!--            <if test="userId != null">-->
+<!--                and user_id = #{userId}-->
+<!--            </if>-->
+<!--            <if test="imgname != null and imgname != ''">-->
+<!--                and imgName = #{imgname}-->
+<!--            </if>-->
+<!--            <if test="orgname != null and orgname != ''">-->
+<!--                and orgName = #{orgname}-->
+<!--            </if>-->
+<!--            <if test="username != null and username != ''">-->
+<!--                and userName = #{username}-->
+<!--            </if>-->
+<!--            <if test="parentid != null and parentid != ''">-->
+<!--                and parentId = #{parentid}-->
+<!--            </if>-->
+<!--            <if test="parentname != null and parentname != ''">-->
+<!--                and parentName = #{parentname}-->
+<!--            </if>-->
+<!--            <if test="roleorgmodels != null and roleorgmodels != ''">-->
+<!--                and roleOrgModels = #{roleorgmodels}-->
+<!--            </if>-->
+<!--            <if test="roleName != null and roleName != ''">-->
+<!--                and role_name = #{roleName}-->
+<!--            </if>-->
+<!--            <if test="password != null and password != ''">-->
+<!--                and password = #{password}-->
+<!--            </if>-->
+<!--            <if test="phone != null and phone != ''">-->
+<!--                and phone = #{phone}-->
+<!--            </if>-->
+<!--            <if test="createtime != null and createtime != ''">-->
+<!--                and createTime = #{createtime}-->
+<!--            </if>-->
+<!--            <if test="email != null and email != ''">-->
+<!--                and email = #{email}-->
+<!--            </if>-->
+<!--            <if test="disable != null and disable != ''">-->
+<!--                and disable = #{disable}-->
+<!--            </if>-->
+<!--            <if test="enabledtext != null and enabledtext != ''">-->
+<!--                and EnabledText = #{enabledtext}-->
+<!--            </if>-->
+<!--            <if test="seq != null and seq != ''">-->
+<!--                and seq = #{seq}-->
+<!--            </if>-->
+<!--            <if test="remark != null and remark != ''">-->
+<!--                and Remark = #{remark}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash;新增所有列&ndash;&gt;-->
+<!--    <insert id="insert" keyProperty="id" useGeneratedKeys="true">-->
+<!--        insert into bdswebplatform.user(user_id, imgName, orgName, userName, parentId, parentName, roleOrgModels, role_name, password, phone, createTime, email, disable, EnabledText, seq, Remark)-->
+<!--        values (#{userId}, #{imgname}, #{orgname}, #{username}, #{parentid}, #{parentname}, #{roleorgmodels}, #{roleName}, #{password}, #{phone}, #{createtime}, #{email}, #{disable}, #{enabledtext}, #{seq}, #{remark})-->
+<!--    </insert>-->
+
+<!--    &lt;!&ndash;通过主键修改数据&ndash;&gt;-->
+<!--    <update id="update">-->
+<!--        update bdswebplatform.user-->
+<!--        <set>-->
+<!--            <if test="userId != null">-->
+<!--                user_id = #{userId},-->
+<!--            </if>-->
+<!--            <if test="imgname != null and imgname != ''">-->
+<!--                imgName = #{imgname},-->
+<!--            </if>-->
+<!--            <if test="orgname != null and orgname != ''">-->
+<!--                orgName = #{orgname},-->
+<!--            </if>-->
+<!--            <if test="username != null and username != ''">-->
+<!--                userName = #{username},-->
+<!--            </if>-->
+<!--            <if test="parentid != null and parentid != ''">-->
+<!--                parentId = #{parentid},-->
+<!--            </if>-->
+<!--            <if test="parentname != null and parentname != ''">-->
+<!--                parentName = #{parentname},-->
+<!--            </if>-->
+<!--            <if test="roleorgmodels != null and roleorgmodels != ''">-->
+<!--                roleOrgModels = #{roleorgmodels},-->
+<!--            </if>-->
+<!--            <if test="roleName != null and roleName != ''">-->
+<!--                role_name = #{roleName},-->
+<!--            </if>-->
+<!--            <if test="password != null and password != ''">-->
+<!--                password = #{password},-->
+<!--            </if>-->
+<!--            <if test="phone != null and phone != ''">-->
+<!--                phone = #{phone},-->
+<!--            </if>-->
+<!--            <if test="createtime != null and createtime != ''">-->
+<!--                createTime = #{createtime},-->
+<!--            </if>-->
+<!--            <if test="email != null and email != ''">-->
+<!--                email = #{email},-->
+<!--            </if>-->
+<!--            <if test="disable != null and disable != ''">-->
+<!--                disable = #{disable},-->
+<!--            </if>-->
+<!--            <if test="enabledtext != null and enabledtext != ''">-->
+<!--                EnabledText = #{enabledtext},-->
+<!--            </if>-->
+<!--            <if test="seq != null and seq != ''">-->
+<!--                seq = #{seq},-->
+<!--            </if>-->
+<!--            <if test="remark != null and remark != ''">-->
+<!--                Remark = #{remark},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        where id = #{id}-->
+<!--    </update>-->
+
+<!--    &lt;!&ndash;通过主键删除&ndash;&gt;-->
+<!--    <delete id="deleteById">-->
+<!--        delete from bdswebplatform.user where id = #{id}-->
+<!--    </delete>-->
+
+<!--</mapper>-->

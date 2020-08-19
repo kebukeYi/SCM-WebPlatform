@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.car.mapper.CarManagementMapper">
+
+    <!--查询-->
+    <select id="getCarListFromMap" resultType="com.car.domain.Car">
+        select * from car
+        <where>
+
+            <if test="Key!=null">
+                PlateNo=#{Key}
+            </if>
+
+            <if test="OrgId!=null">
+                and group_id=#{OrgId}
+            </if>
+
+            <if test="CataId!=null">
+                and catalogue_id=#{CataId}
+            </if>
+
+            <if test="userId!=null">
+                and user_id=#{userId}
+            </if>
+
+        </where>
+        limit #{start},#{limit}
+    </select>
+
+
+    <!--新增所有列-->
+    <insert id="insertCar" keyProperty="id" useGeneratedKeys="true">
+        insert into bdswebplatform.car(user_id, group_id,catalogue_id, car_name,group_name, PlateNo, VIN, CarColor, CarType, Brand, Model, Owner, Phone, Remark)
+        values (
+        #{userId}, #{OrgId}, #{CataId},#{CataName},#{OrgName}, #{PlateNo}, #{VIN}, #{CarColor}, #{CarType}, #{Brand}, #{Model}, #{Owner}, #{Phone}, #{Remark})
+    </insert>
+
+    <insert id="insertCarForEach" useGeneratedKeys="true" parameterType="java.util.List">
+        insert into bdswebplatform.car(user_id, group_id, group_name, catalogue_id, car_name, PlateNo, VIN, CarColor,
+        CarType, Brand, Model, Owner, Phone, ZipDeviceModels, Remark)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.user_id},
+            #{item.group_id},
+            #{item.group_name},
+            #{item.catalogue_id},
+            #{item.carName},
+            #{item.PlateNo},
+            #{item.VIN},
+            #{item.CarColor},
+            #{item.CarType},
+            #{item.Brand},
+            #{item.Model},
+            #{item.Owner},
+            #{item.Phone},
+            #{item.ZipDeviceModels},
+            #{item.Remark}
+            )
+        </foreach>
+    </insert>
+
+    <!--车辆进行绑定-->
+    <update id="AssociateVehicle">
+        update car
+        <set>
+            <if test="TerIds!=null and TerIds!='' ">
+                ZipDeviceModels=#{TerIds}
+            </if>
+        </set>
+        where id=#{CarId}
+    </update>
+
+    <update id="update">
+        update car
+        <set>
+            group_name=#{OrgName},
+            car_name=#{CataName},
+
+            <if test="UserId!=null">
+                user_id=#{UserId},
+            </if>
+
+            <if test="OrgId!=null">
+                group_id=#{OrgId},
+            </if>
+
+            <if test="CataId!=null">
+                catalogue_id=#{CataId},
+            </if>
+
+            <if test="Brand!=''">
+                Brand=#{Brand},
+            </if>
+
+            <if test="CarColor!=''">
+                CarColor=#{CarColor},
+            </if>
+
+            <if test="CarType!=''">
+                CarType=#{CarType},
+            </if>
+
+            <if test="Model!=''">
+                Model=#{Model},
+            </if>
+
+            <if test="OrgId!=''">
+                group_id=#{OrgId},
+            </if>
+
+            <if test="Owner!=''">
+                Owner=#{Owner},
+            </if>
+
+            <if test="Phone!=''">
+                Phone=#{Phone},
+            </if>
+
+            <if test="PlateNo!=''">
+                PlateNo=#{PlateNo},
+            </if>
+
+            <if test="VIN!=''">
+                VIN=#{VIN},
+            </if>
+
+            <if test="Remark!=''">
+                Remark=#{Remark}
+            </if>
+
+        </set>
+        where id=#{Id}
+    </update>
+
+    <!-- 车辆消除绑定终端绑定-->
+    <update id="DisassociateVehicle">
+        update car  set ZipDeviceModels=""  where ZipDeviceModels=#{TerIds}
+    </update>
+
+    <!-- 删除车辆-->
+    <delete id="del">
+        delete  from car where  id=#{id}
+    </delete>
+
+
+</mapper>

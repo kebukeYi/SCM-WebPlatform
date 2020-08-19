@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.car.mapper.StopReportMapper">
+
+    <!--查询-->
+    <select id="getStopListFromMap" parameterType="map" resultType="com.car.domain.Stop">
+        select * from stop_report
+        <where>
+
+            <if test="Key!=null">
+                dev_number=#{Key}
+            </if>
+
+            <if test="OrgId!=null">
+                and group_id=#{OrgId}
+            </if>
+
+            <if test="CataId!=null">
+                and catalogue_id=#{CataId}
+            </if>
+
+            <if test="ModelType!=null and ModelType!='' ">
+                and model_type=#{ModelType}
+            </if>
+
+            <if test="Interval!=null and Interval!='' ">
+                and intervaltext > #{Interval}
+            </if>
+
+            <if test="StartTime!=null and EndTime!=null">
+                and location_time <![CDATA[>]]> #{StartTime} and location_time  <![CDATA[<]]>  #{EndTime}
+            </if>
+
+        </where>
+
+        limit #{start},#{limit}
+    </select>
+
+
+    <!--插入-->
+    <insert id="insertStop" parameterType="java.util.List" useGeneratedKeys="true">
+       insert into bdswebplatform.stop_report(group_id,user_id,group_name, dev_name, dev_number, cata_name,model_type, lng, lat, lnglat, location_time, receive_time,starttime,endtime,intervaltext)
+        values (#{group_id},#{user_id}, #{group_name}, #{dev_name}, #{dev_number}, #{cata_name},#{model_type}, #{lng}, #{lat}, #{lnglat}, #{location_time}, #{receive_time}#{starttime},#{endtime},#{intervaltext})
+
+    </insert>
+
+    <insert id="insertStopForEach" parameterType="com.car.domain.Stop">
+        insert into bdswebplatform.stop_report(group_id, user_id, group_name, dev_name, dev_number,
+        cata_name,catalogue_id, model_type,lng, lat, lnglat,location_time, receive_time,starttime,endtime,intervaltext)
+        values
+        <foreach collection="list" index="index" separator="," item="item">
+            (
+            #{item.group_id},
+            #{item.user_id},
+            #{item.group_name},
+            #{item.dev_name},
+            #{item.dev_number},
+            #{item.cata_name},
+            #{item.catalogue_id},
+            #{item.model_type},
+            #{item.lng},
+            #{item.lat},
+            #{item.lnglat},
+            #{item.location_time},
+            #{item.receive_time},
+            #{item.starttime},
+            #{item.endtime},
+            #{item.intervaltext}
+            )
+        </foreach>
+    </insert>
+
+
+</mapper>

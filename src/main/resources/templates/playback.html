@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<html style="height: 100%;">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>轨迹回放</title>
+    <link href="/Content/bootstrap.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/font-awesome.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/css/AdminLTE.min.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/bootstrap-slider.css?1.0.17.014" rel="stylesheet">
+    <link href="/Content/jquery-confirm.min.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/css/skins/_all-skins.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/daterangepicker.css?1.0.17.014" rel="stylesheet" type="text/css">
+    <link href="/Content/map/map.css?1.0.17.014" rel="stylesheet" type="text/css">
+
+    <script src="/Scripts/app/ip.js"></script>
+    <script src="/Scripts/jquery-1.10.2.min.js?1.0.17.014"></script>
+    <script src="/Scripts/bootstrap.js?1.0.17.014"></script>
+    <script src="/Scripts/jquery-confirm.min.js?1.0.17.014"></script>
+    <script src="/Scripts/bootstrap-slider.min.js?1.0.17.014" type="text/javascript"></script>
+    <script src="http://webapi.amap.com/maps?v=1.4.6&amp;key=77ad5ff40bcc2c50468a4d502445d2b6"></script>
+    <script src="/Scripts/monitor/amap.js"></script>
+    <script src="/Scripts/app/Playback.js?1.0.17.014"></script>
+
+    <script src="/Scripts/jquerycommon?v=tKD6tqyhjpG37xxus3-j4JX9-nPzp6SkYpROp_GI2-Y1"></script>
+    <script src="/Scripts/datetimecommon?v=wkG5GFxNG-aL0la6376x8OmPMGjqnkYbYRiRbLfBXbA1"></script>
+
+    <script type="text/javascript">
+        var mapType = 0;
+        var update_key = '';
+        var update_name = '';
+        var update_mt = 0; //有线无线，
+        var czoom = '14';
+    </script>
+    <style>
+        .control_btn {
+            border-radius: 3px;
+            color: #666;
+            padding: 3px 6px;
+            display: inline-block;
+            cursor: pointer;
+            box-sizing: border-box;
+            font-size: 20px;
+        }
+
+        .table-alt {
+            background-color: #fafafa;
+        }
+
+        .dot_cell1 {
+            width: 135px;
+        }
+
+        .dot_cell2 {
+            width: 80px;
+        }
+
+        .dot_cell3 {
+            width: 70px;
+        }
+
+        .dot_cell4 {
+            width: 235px;
+        }
+
+        .selected {
+            background-color: #b0bed9;
+        }
+
+        ul.table_header {
+            width: 550px;
+            height: 25px;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        ul.table_body {
+            height: calc(100% - 25px);
+            width: 550px;
+            margin: 0px;
+            padding: 0px;
+            overflow-y: auto;
+        }
+
+        .table_header li {
+            padding: 1px 5px 1px 5px;
+            font-weight: bold;
+            float: left;
+            list-style-type: none;
+        }
+
+        .table_body li {
+            padding: 1px 5px 1px 5px;
+            list-style-type: none;
+            cursor: pointer;
+        }
+
+        .table_body li span {
+            display: -moz-inline-box;
+            display: inline-block;
+        }
+
+        span.postion_checkbox {
+            line-height: 0;
+            margin: 0;
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            vertical-align: middle;
+            border: 0 none;
+            cursor: pointer;
+            outline: none;
+            background-color: transparent;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            background-image: url("/Content/ztree/zTreeStyle/img/zTreeStandard.png");
+            *background-image: url("/Content/ztree/zTreeStyle/img/zTreeStandard.gif");
+        }
+
+        span.postion_checkbox {
+            width: 13px;
+            height: 13px;
+            margin: 0 3px 0 0;
+        }
+
+        span.postion_checkbox.checkbox_false_full { /* background-position:0 0 */
+        }
+
+        span.postion_checkbox.checkbox_false_full:hover {
+            background-position: 0 -14px;
+        }
+
+        span.postion_checkbox.checkbox_false_part {
+            background-position: 0 -28px;
+        }
+
+        span.postion_checkbox.checkbox_false_part:hover {
+            background-position: 0 -42px;
+        }
+
+        span.postion_checkbox.checkbox_false_disable {
+            background-position: 0 -56px;
+        }
+
+        span.postion_checkbox.checkbox_true_full {
+            background-position: -14px 0;
+        }
+
+        span.postion_checkbox.checkbox_true_full:hover {
+            background-position: -14px -14px;
+        }
+
+        span.postion_checkbox.checkbox_true_part {
+            background-position: -14px -28px;
+        }
+
+        span.postion_checkbox.checkbox_true_part:hover {
+            background-position: -14px -42px;
+        }
+
+        span.postion_checkbox.checkbox_true_disable {
+            background-position: -14px -56px;
+        }
+
+        .d_contain > div {
+            float: left;
+        }
+
+
+
+        .d_contain .d_width {
+            width: 220px;
+        }
+
+        .amap-info-content {
+            width: 225px !important;
+        }
+    </style>
+</head>
+<body style="height:100%;margin:0;padding:0;">
+<div id="monitor_Div" style="width: 100%; height: 100%; position: absolute;">
+    <div id="leftDiv"
+         style="width: 560px; float: left; height: 100%; padding-left: 10px; padding-bottom: 10px; padding-top: 10px; display: none;">
+        <ul class="table_header">
+            <li class="dot_cell1">时间</li>
+            <li class="dot_cell2">速度</li>
+            <li class="dot_cell3">定位方式</li>
+            <li class="dot_cell4">位置</li>
+        </ul>
+        <ul id="tableul" class="table_body"></ul>
+    </div>
+    <div id="shrinkdiv"
+         style="display: table; width: 10px; float: left; height: 100%; background-color: rgb(236, 240, 245); cursor: pointer; vertical-align: middle;">
+        <div style="display: table-cell; vertical-align: middle;"><i class="fa fa-chevron-right"></i></div>
+    </div>
+    <div id="mmap" style="overflow: hidden; height: 100%;">
+        <div class="RightToolBar"
+             style="position: absolute; top: 10px; right: 120px; border-radius: 3px; overflow: hidden;z-index:9999">
+            <div class="defaultTools_rightToolBar"
+                 style="background: rgb(255, 255, 255); float: left; margin-right: 6px; border: 1px solid rgb(196, 199, 204); cursor: pointer;">
+                <span title="距离测量,单击确定地点,双击结束" id="btnDistance" class="icon-measure icon-rightToolBar"
+                      style="float: left; height: 20px; width: 22px; border-right: 1px solid rgb(236, 237, 239);"></span>
+            </div>
+            <div class="defaultTools_rightToolBar"
+                 style="background: rgb(255, 255, 255); float: left; margin-right: 6px; border: 1px solid rgb(196, 199, 204); cursor: pointer;">
+                <select id="mapSelect" style="float: left;height:20px;cursor:pointer;" title="切换地图">
+                    <option value="0" selected>高德</option>
+                    <option value="1">百度</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loading_mask mask_div"></div>
+<div class="loading_mask shining_loading">加载中。。</div>
+
+
+</body>
+</html>

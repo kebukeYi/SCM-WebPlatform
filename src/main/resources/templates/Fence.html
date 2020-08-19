@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>围栏管理</title>
+    <link href="/Content/bootstrap.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/common.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/bootstrapValidator.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/font-awesome.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/css/AdminLTE.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/jquery-confirm.min.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/css/skins/_all-skins.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/ztree/zTreeStyle/zTreeStyle.css?1.0.17.014" rel="stylesheet" type="text/css">
+    <link href="/Content/buttons.dataTables.min.css?1.0.17.014" rel="stylesheet" type="text/css">
+    <link href="/Content/dataTables.bootstrap.min.css?1.0.17.014" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/Content/map/map.css?1.0.17.014" type="text/css">
+
+    <script src="/Scripts/app/ip.js"></script>
+    <script src="/Scripts/jquery-1.10.2.min.js?1.0.17.014"></script>
+    <script src="/Scripts/jquery.slimscroll.min.js?1.0.17.014"></script>
+    <script src="/Scripts/jquery-confirm.min.js?1.0.17.014"></script>
+    <script src="/Scripts/jquery.dataTables.min.js?1.0.17.014"></script>
+    <script src="/Scripts/bootstrap.js?1.0.17.014"></script>
+    <script src="/Scripts/Validator/bootstrapValidator.js?1.0.17.014"></script>
+    <script src="/Scripts/dataTables.bootstrap.min.js?1.0.17.014"></script>
+    <script src="/Scripts/modernizr-2.6.2.js?1.0.17.014"></script>
+    <script src="/Scripts/appcommon?v=0S9yeo1f2OE3AUuKkVAN4Vrdz3CCFaGlEjRBPgMB5mo1"></script>
+    <script src="/Scripts/map.js?v=-Ysra2GdrgPu81_CpljIv6gwb0h3dvElYxZ18F56pOU1"></script>
+    <script src="/Scripts/monitor/fence.js?1.0.17.014"></script>
+
+    <script type="text/javascript">
+
+        var flds = new (function () {
+            var r = {};
+            'search' && $.each('search'.split(','), function (i, n) {
+                r[n] = 1;
+            });
+            return r;
+        });
+        var centerlng = '';
+        var centerlat = '';
+        var czoom = '';
+        var mapView = '118.179931647,39.63953756,11';
+        if (mapView) {
+            var m = mapView.split(',');
+            centerlng = m[0];
+            centerlat = m[1];
+            czoom = m[2];
+        }
+    </script>
+</head>
+<body class="hold-transition skin-blue sidebar-mini fixed">
+<div class="wrapper">
+    <!-- Main Header -->
+    <header class="main-header">
+        <!--            主页链接 -->
+        <a href="/home" class="logo" style="background-image:url('/Content/org/logo.jpg?636513474412430000');background-position:center;background-repeat:no-repeat;background-size: contain;">
+
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"></span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+
+                    <!-- 后台名字ID 处    [[${session.loginUser}]]   -->
+                    <li><a href="#" id="username">[[${session.loginUser}]]</a></li>
+
+                    <li class="home_li">
+                        <!--            主页链接 -->
+                        <a href="/home" title="首页">
+                            <i class="fa fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="alarm_li">
+                        <a href="#" data-toggle="modal" data-target="#alarmModal" title="报警详情">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="label label-danger">...</span>
+                        </a>
+                    </li>
+                    <li class="alarm_audio_li">
+                        <a href="#" title="打开报警声音">
+                            <i class="glyphicon glyphicon-volume-off"></i>
+                        </a>
+                        <audio style="display:none" id="alarmAudio" src="/Content/sound/alarm.mp3"></audio>
+                    </li>
+                    <li class="pwd_li">
+                        <a href="#" data-toggle="modal" data-target="#pwdModal" title="修改密码">
+                            <i class="fa fa-key"></i>
+                        </a>
+                    </li>
+                    <li class="logout_li">
+                        <a href="/Logout" title="退出">
+                            <i class="fa fa-sign-out"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <div class="sidebar" id="scrollspy">
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="nav sidebar-menu">
+<!--                <li class="header"></li>-->
+
+                <li><a href="/home"><i class="fa fa-home"></i><span>主页</span></a></li>
+                <li class="treeview  active">
+                    <a href="#"><i class="fa fa-television"></i><span>监控管理</span><i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="/monitor"><i class="fa fa-map-marker"></i><span>监控中心</span></a></li>
+                        <li class="active"><a href="#"><i class="fa fa-slack"></i><span>围栏管理</span></a></li>
+                    </ul>
+                </li>
+                <li class="treeview ">
+                    <a href="#"><i class="fa fa-line-chart"></i><span>报表中心</span><i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="/AlarmReport"><i class="fa fa-folder-o"></i><span>报警报表</span></a></li>
+                        <li><a href="/OfflineReport"><i class="fa fa-folder-o"></i><span>离线报表</span></a></li>
+                        <li><a href="/OnlineReport"><i class="fa fa-folder-o"></i><span>在线报表</span></a></li>
+                        <li><a href="/StopReport"><i class="fa fa-folder-o"></i><span>停留报表</span></a></li>
+                        <li><a href="/MileageReport"><i class="fa fa-folder-o"></i><span>里程报表</span></a></li>
+                    </ul>
+                </li>
+                <li class="treeview ">
+                    <a href="#"><i class="fa fa-share-alt-square"></i><span>设备管理</span><i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="/TerminalMonitor"><i class="fa fa-tablet"></i><span>终端管理</span></a></li>
+                        <li><a href="/CarManagement"><i class="fa fa-automobile"></i><span>车辆管理</span></a></li>
+
+                    </ul>
+                </li>
+                <li class="treeview ">
+                    <a href="#"><i class="fa fa-th-large"></i><span>系统管理</span><i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="/UserManagement"><i class="fa fa-user"></i><span>用户管理</span></a></li>
+                        <li ><a href="/GroupManagement"><i class="fa fa-sitemap"></i><span>组管理</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style="position:relative;">
+
+
+        <div id="fence_Div" class="fence_outDiv" style="width: 100%;height:100%; position: absolute;">
+            <div style="width: 450px; float: left; height: 100%; padding: 10px;">
+                <div style="width: 100%; height:100%; float: left; padding: 10px;box-shadow:0 1px 1px rgba(0,0,0,0.1);border-radius:3px;background-color:white;border:1px solid #d2d6de">
+                    <h3 style="display: inline-block;padding-right:5px;">围栏管理</h3><span
+                        style="font-size:12px;color:#337ab7;">点击地图右上图标<img src="/Content/map/RightToolBar/circle.png" width="12"><img src="/Content/map/RightToolBar/SelectAdminArea.png" width="12">&nbsp;画圆形或行政区域围栏</span>
+                    <div id="table_Div">
+                    </div>
+                </div>
+            </div>
+            <div id="mmap" style="overflow: hidden; height: 100%; position: relative;">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="pwdModal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="pwdModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:455px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="pwdModalLabel">修改密码</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="oldPwd">原密码</label>
+                    <input type="password" class="form-control" id="oldpwd" placeholder="原密码" name="oldpwd"
+                           datafld="oldPassword">
+                </div>
+                <div class="form-group">
+                    <label for="newPwd">新密码</label>
+                    <input type="password" class="form-control" id="newpwd" placeholder="新密码" name="password"
+                           datafld="newPassword">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPwd">确认密码</label>
+                    <input type="password" class="form-control" id="confirmpwd" placeholder="确认密码"
+                           name="confirmPassword" datafld="confirmPassword">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-default" id="btnModypwd">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+[{
+  "DeviceId": "2609c1f4-15fe-4e95-8fc7-ab0a012096c5",
+  "DeviceName": "C18-21109",
+  "DeviceNumber": "181219470021109",
+  "OrgName": "C181119",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "DeviceId": "de806ccd-8cd3-4e80-8fdf-ab0a012096c5",
+  "DeviceName": "C18-21104",
+  "DeviceNumber": "181219470021104",
+  "OrgName": "C181119",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "DeviceId": "064c4be6-6ac9-4b9a-96e0-ab0a012096c5",
+  "DeviceName": "C18-21106",
+  "DeviceNumber": "181219470021106",
+  "OrgName": "C181119",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "DeviceId": "a8bb4afc-1bc4-4a96-9cfe-ab0a012096c5",
+  "DeviceName": "C18-21105",
+  "DeviceNumber": "181219470021105",
+  "OrgName": "C181119",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "DeviceId": "377fd078-5839-4e66-a952-ab0a012096c5",
+  "DeviceName": "C18-21107",
+  "DeviceNumber": "181219470021107",
+  "OrgName": "C181119",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "DeviceId": "64db7154-96a0-4766-a99d-ab0a012096c5",
+  "DeviceName": "C18-21103",
+  "DeviceNumber": "181219470021103",
+  "OrgName": "C181119",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "DeviceId": "462b4fe3-f1a0-4a91-b104-ab0a012096c5",
+  "DeviceName": "C18-21110",
+  "DeviceNumber": "181219470021110",
+  "OrgName": "C181119",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "DeviceId": "da533e04-3978-4a7b-b411-ab0a012096c5",
+  "DeviceName": "C18-21101",
+  "DeviceNumber": "181219470021101",
+  "OrgName": "C181119",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "DeviceId": "f1c43e73-62c9-4487-b6da-ab0a012096c5",
+  "DeviceName": "C18-21108",
+  "DeviceNumber": "181219470021108",
+  "OrgName": "C181119",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "DeviceId": "1e513af3-a245-434e-b978-ab0a012096c5",
+  "DeviceName": "C18-21102",
+  "DeviceNumber": "181219470021102",
+  "OrgName": "C181119",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "DeviceId": "4f80cfee-48ec-4b7e-bb9e-ab0a012096c5",
+  "DeviceName": "C18-21092",
+  "DeviceNumber": "181219470021092",
+  "OrgName": "C181119",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "DeviceId": "edbb2f0c-3111-4ef2-bd1e-ab0a012096c5",
+  "DeviceName": "C18-21095",
+  "DeviceNumber": "181219470021095",
+  "OrgName": "C181119",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "DeviceId": "0258b4e8-72e0-4498-bd3e-ab0a012096c5",
+  "DeviceName": "C18-21098",
+  "DeviceNumber": "181219470021098",
+  "OrgName": "C181119",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "DeviceId": "c10a55d2-962d-4cdb-bddc-ab0a012096c5",
+  "DeviceName": "C18-21096",
+  "DeviceNumber": "181219470021096",
+  "OrgName": "C181119",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}, {
+  "DeviceId": "cc4a1e0e-b8ce-42ad-b26f-ab0a012096c5",
+  "DeviceName": "C18-21097",
+  "DeviceNumber": "181219470021097",
+  "OrgName": "C181119",
+  "FenceId": null,
+  "AlarmType": null,
+  "AlarmTypeText": ""
+}]

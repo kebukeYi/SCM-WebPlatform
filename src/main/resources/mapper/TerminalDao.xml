@@ -1,0 +1,196 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+<!--<mapper namespace=".dao.TerminalDao">-->
+
+<!--    <resultMap type=".entity.Terminal" id="TerminalMap">-->
+<!--        <result property="id" column="id" jdbcType="INTEGER"/>-->
+<!--        <result property="iccid" column="iccid" jdbcType="VARCHAR"/>-->
+<!--        <result property="imsi" column="imsi" jdbcType="VARCHAR"/>-->
+<!--        <result property="devNumber" column="dev_number" jdbcType="VARCHAR"/>-->
+<!--        <result property="devName" column="dev_name" jdbcType="VARCHAR"/>-->
+<!--        <result property="plateno" column="plateNo" jdbcType="VARCHAR"/>-->
+<!--        <result property="modelId" column="model_id" jdbcType="VARCHAR"/>-->
+<!--        <result property="modelType" column="model_type" jdbcType="VARCHAR"/>-->
+<!--        <result property="modelTypeName" column="model_type_name" jdbcType="VARCHAR"/>-->
+<!--        <result property="userId" column="user_id" jdbcType="VARCHAR"/>-->
+<!--        <result property="groupId" column="group_id" jdbcType="VARCHAR"/>-->
+<!--        <result property="groupName" column="group_name" jdbcType="VARCHAR"/>-->
+<!--        <result property="catalogueId" column="catalogue_id" jdbcType="VARCHAR"/>-->
+<!--        <result property="cataName" column="cata_name" jdbcType="VARCHAR"/>-->
+<!--        <result property="fenceId" column="fence_id" jdbcType="VARCHAR"/>-->
+<!--        <result property="fenceAlarmType" column="fence_alarm_type" jdbcType="VARCHAR"/>-->
+<!--        <result property="creatTime" column="creat_time" jdbcType="VARCHAR"/>-->
+<!--        <result property="locationTime" column="location_time" jdbcType="VARCHAR"/>-->
+<!--        <result property="locationType" column="location_type" jdbcType="VARCHAR"/>-->
+<!--        <result property="mfDate" column="mf_date" jdbcType="VARCHAR"/>-->
+<!--        <result property="expireDate" column="expire_date" jdbcType="VARCHAR"/>-->
+<!--    </resultMap>-->
+
+<!--    &lt;!&ndash;查询单个&ndash;&gt;-->
+<!--    <select id="queryById" resultMap="TerminalMap">-->
+<!--        select-->
+<!--          id, iccid, imsi, dev_number, dev_name, plateNo, model_id, model_type, model_type_name, user_id, group_id, group_name, catalogue_id, cata_name, fence_id, fence_alarm_type, creat_time, location_time, location_type, mf_date, expire_date-->
+<!--        from bdswebplatform.terminal-->
+<!--        where id = #{id}-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash;查询指定行数据&ndash;&gt;-->
+<!--    <select id="queryAllByLimit" resultMap="TerminalMap">-->
+<!--        select-->
+<!--          id, iccid, imsi, dev_number, dev_name, plateNo, model_id, model_type, model_type_name, user_id, group_id, group_name, catalogue_id, cata_name, fence_id, fence_alarm_type, creat_time, location_time, location_type, mf_date, expire_date-->
+<!--        from bdswebplatform.terminal-->
+<!--        limit #{offset}, #{limit}-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash;通过实体作为筛选条件查询&ndash;&gt;-->
+<!--    <select id="queryAll" resultMap="TerminalMap">-->
+<!--        select-->
+<!--          id, iccid, imsi, dev_number, dev_name, plateNo, model_id, model_type, model_type_name, user_id, group_id, group_name, catalogue_id, cata_name, fence_id, fence_alarm_type, creat_time, location_time, location_type, mf_date, expire_date-->
+<!--        from bdswebplatform.terminal-->
+<!--        <where>-->
+<!--            <if test="id != null">-->
+<!--                and id = #{id}-->
+<!--            </if>-->
+<!--            <if test="iccid != null and iccid != ''">-->
+<!--                and iccid = #{iccid}-->
+<!--            </if>-->
+<!--            <if test="imsi != null and imsi != ''">-->
+<!--                and imsi = #{imsi}-->
+<!--            </if>-->
+<!--            <if test="devNumber != null and devNumber != ''">-->
+<!--                and dev_number = #{devNumber}-->
+<!--            </if>-->
+<!--            <if test="devName != null and devName != ''">-->
+<!--                and dev_name = #{devName}-->
+<!--            </if>-->
+<!--            <if test="plateno != null and plateno != ''">-->
+<!--                and plateNo = #{plateno}-->
+<!--            </if>-->
+<!--            <if test="modelId != null and modelId != ''">-->
+<!--                and model_id = #{modelId}-->
+<!--            </if>-->
+<!--            <if test="modelType != null and modelType != ''">-->
+<!--                and model_type = #{modelType}-->
+<!--            </if>-->
+<!--            <if test="modelTypeName != null and modelTypeName != ''">-->
+<!--                and model_type_name = #{modelTypeName}-->
+<!--            </if>-->
+<!--            <if test="userId != null and userId != ''">-->
+<!--                and user_id = #{userId}-->
+<!--            </if>-->
+<!--            <if test="groupId != null and groupId != ''">-->
+<!--                and group_id = #{groupId}-->
+<!--            </if>-->
+<!--            <if test="groupName != null and groupName != ''">-->
+<!--                and group_name = #{groupName}-->
+<!--            </if>-->
+<!--            <if test="catalogueId != null and catalogueId != ''">-->
+<!--                and catalogue_id = #{catalogueId}-->
+<!--            </if>-->
+<!--            <if test="cataName != null and cataName != ''">-->
+<!--                and cata_name = #{cataName}-->
+<!--            </if>-->
+<!--            <if test="fenceId != null and fenceId != ''">-->
+<!--                and fence_id = #{fenceId}-->
+<!--            </if>-->
+<!--            <if test="fenceAlarmType != null and fenceAlarmType != ''">-->
+<!--                and fence_alarm_type = #{fenceAlarmType}-->
+<!--            </if>-->
+<!--            <if test="creatTime != null and creatTime != ''">-->
+<!--                and creat_time = #{creatTime}-->
+<!--            </if>-->
+<!--            <if test="locationTime != null and locationTime != ''">-->
+<!--                and location_time = #{locationTime}-->
+<!--            </if>-->
+<!--            <if test="locationType != null and locationType != ''">-->
+<!--                and location_type = #{locationType}-->
+<!--            </if>-->
+<!--            <if test="mfDate != null and mfDate != ''">-->
+<!--                and mf_date = #{mfDate}-->
+<!--            </if>-->
+<!--            <if test="expireDate != null and expireDate != ''">-->
+<!--                and expire_date = #{expireDate}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash;新增所有列&ndash;&gt;-->
+<!--    <insert id="insert" keyProperty="id" useGeneratedKeys="true">-->
+<!--        insert into bdswebplatform.terminal(iccid, imsi, dev_number, dev_name, plateNo, model_id, model_type, model_type_name, user_id, group_id, group_name, catalogue_id, cata_name, fence_id, fence_alarm_type, creat_time, location_time, location_type, mf_date, expire_date)-->
+<!--        values (#{iccid}, #{imsi}, #{devNumber}, #{devName}, #{plateno}, #{modelId}, #{modelType}, #{modelTypeName}, #{userId}, #{groupId}, #{groupName}, #{catalogueId}, #{cataName}, #{fenceId}, #{fenceAlarmType}, #{creatTime}, #{locationTime}, #{locationType}, #{mfDate}, #{expireDate})-->
+<!--    </insert>-->
+
+<!--    &lt;!&ndash;通过主键修改数据&ndash;&gt;-->
+<!--    <update id="update">-->
+<!--        update bdswebplatform.terminal-->
+<!--        <set>-->
+<!--            <if test="iccid != null and iccid != ''">-->
+<!--                iccid = #{iccid},-->
+<!--            </if>-->
+<!--            <if test="imsi != null and imsi != ''">-->
+<!--                imsi = #{imsi},-->
+<!--            </if>-->
+<!--            <if test="devNumber != null and devNumber != ''">-->
+<!--                dev_number = #{devNumber},-->
+<!--            </if>-->
+<!--            <if test="devName != null and devName != ''">-->
+<!--                dev_name = #{devName},-->
+<!--            </if>-->
+<!--            <if test="plateno != null and plateno != ''">-->
+<!--                plateNo = #{plateno},-->
+<!--            </if>-->
+<!--            <if test="modelId != null and modelId != ''">-->
+<!--                model_id = #{modelId},-->
+<!--            </if>-->
+<!--            <if test="modelType != null and modelType != ''">-->
+<!--                model_type = #{modelType},-->
+<!--            </if>-->
+<!--            <if test="modelTypeName != null and modelTypeName != ''">-->
+<!--                model_type_name = #{modelTypeName},-->
+<!--            </if>-->
+<!--            <if test="userId != null and userId != ''">-->
+<!--                user_id = #{userId},-->
+<!--            </if>-->
+<!--            <if test="groupId != null and groupId != ''">-->
+<!--                group_id = #{groupId},-->
+<!--            </if>-->
+<!--            <if test="groupName != null and groupName != ''">-->
+<!--                group_name = #{groupName},-->
+<!--            </if>-->
+<!--            <if test="catalogueId != null and catalogueId != ''">-->
+<!--                catalogue_id = #{catalogueId},-->
+<!--            </if>-->
+<!--            <if test="cataName != null and cataName != ''">-->
+<!--                cata_name = #{cataName},-->
+<!--            </if>-->
+<!--            <if test="fenceId != null and fenceId != ''">-->
+<!--                fence_id = #{fenceId},-->
+<!--            </if>-->
+<!--            <if test="fenceAlarmType != null and fenceAlarmType != ''">-->
+<!--                fence_alarm_type = #{fenceAlarmType},-->
+<!--            </if>-->
+<!--            <if test="creatTime != null and creatTime != ''">-->
+<!--                creat_time = #{creatTime},-->
+<!--            </if>-->
+<!--            <if test="locationTime != null and locationTime != ''">-->
+<!--                location_time = #{locationTime},-->
+<!--            </if>-->
+<!--            <if test="locationType != null and locationType != ''">-->
+<!--                location_type = #{locationType},-->
+<!--            </if>-->
+<!--            <if test="mfDate != null and mfDate != ''">-->
+<!--                mf_date = #{mfDate},-->
+<!--            </if>-->
+<!--            <if test="expireDate != null and expireDate != ''">-->
+<!--                expire_date = #{expireDate},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        where id = #{id}-->
+<!--    </update>-->
+
+<!--    &lt;!&ndash;通过主键删除&ndash;&gt;-->
+<!--    <delete id="deleteById">-->
+<!--        delete from bdswebplatform.terminal where id = #{id}-->
+<!--    </delete>-->
+
+<!--</mapper>-->

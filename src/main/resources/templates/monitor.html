@@ -1,0 +1,375 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>监控中心</title>
+    <link href="/Content/bootstrap.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/common.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/bootstrapValidator.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/font-awesome.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/css/AdminLTE.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/jquery-confirm.min.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/css/skins/_all-skins.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/ztree/zTreeStyle/zTreeStyle.css?1.0.17.014" rel="stylesheet" type="text/css">
+    <link href="/Content/buttons.dataTables.min.css?1.0.17.014" rel="stylesheet" type="text/css">
+    <link href="/Content/dataTables.bootstrap.min.css?1.0.17.014" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/Content/map/map.css?1.0.17.014" type="text/css">
+    <style>
+        #mmap label {
+            max-width: none;
+        }
+
+        .d_line_marker#marker {
+            position: fixed;
+            background: rgba(0, 0, 0, 0.5);
+            height: 100%;
+            width: 100%;
+            z-index: 10000 !important;
+            display: none;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .d_line_marker .line_details .line_date li {
+            float: left;
+            text-align: center;
+            width: 120px;
+            font-size: 16px;
+            font-family: 'Microsoft YaHei';
+            padding: 10px 0px;
+        }
+
+        .d_line_marker .line_details {
+            width: 800px;
+            background: #fff;
+            margin: 0 auto;
+            padding-bottom: 10px;
+            margin-top: 150px;
+        }
+
+        .d_line_marker .line_details ul {
+            padding: 10px 0px 10px 20px;
+        }
+
+        .d_line_marker .line_details .line_date span {
+            width: 60px;
+            height: 30px;
+            line-height: 30px;
+            font-family: 'Microsoft YaHei';
+            font-size: 18px;
+            display: block;
+            margin: 0 auto;
+            cursor: pointer;
+            background: #eee;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .d_line_marker .line_details h2 {
+            padding: 10px 0px 10px 5px;
+            font-size: 20px;
+            border-bottom: #eee solid 1px;
+        }
+
+        .table_map > div {
+            display: block;
+        }
+
+        .table_map > div:last-child {
+            display: block;
+        }
+
+        .table_map #d_inforwidown {
+            display: block;
+            padding: 10px 0px 0px 0px;
+            border-top: solid 2px #3c8dbc;
+            padding-top: 5px;
+        }
+
+        .table_map #d_inforwidown span {
+            padding: 0;
+            background: #ffffff;
+            border: none;
+            margin-left: 0;
+            color: #3c8dbc;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .d_qt {
+            position: absolute;
+            z-index: 99999;
+            right: -32px;
+            padding: 5px 5px 5px 5px;
+            background: #fff;
+            bottom: 24px;
+            border-radius: 3px;
+            box-shadow: 2px 0px 20px darkgrey;
+            display: none;
+        }
+
+        .d_qt span {
+            display: block;
+            padding-bottom: 5px;
+            margin-right: 0px !important;
+        }
+
+        .sendbody .container input {
+            padding: 0;
+            height: 22px;
+            width: 20px;
+            border: none;
+            border: solid 1px #ccc;
+            background: #eee;
+            border-radius: 2px;
+            margin-left: 5px;
+        }
+
+        .sendbody .container .timeSelect {
+            margin-bottom: 5px;
+        }
+
+        .sendbody .form-group {
+            margin-bottom: 10px;
+        }
+
+        .BMap_pop > div:nth-child(9) {
+            overflow: visible !important;
+        }
+
+        .BMap_bubble_content .singl {
+            top: 2px !important;
+            right: 18px !important;
+        }
+
+        .BMap_bubble_content .electric {
+            top: 2px !important;
+            right: 36px !important;
+        }
+
+        .BMap_bubble_content .d_qt {
+            right: -50px;
+            bottom: -14px;
+        }
+    </style>
+    <script src="/Scripts/app/ip.js"></script>
+    <script src="/Scripts/jquery-1.10.2.min.js?1.0.17.014"></script>
+    <script src="/Scripts/jquery.slimscroll.min.js?1.0.17.014"></script>
+    <script src="/Scripts/bootstrap.js?1.0.17.014"></script>
+    <script src="/Scripts/Validator/bootstrapValidator.js?1.0.17.014"></script>
+    <script src="/Scripts/jquery-confirm.min.js?1.0.17.014"></script>
+    <script src="/Scripts/jquery.dataTables.min.js?1.0.17.014"></script>
+    <script src="/Scripts/dataTables.bootstrap.min.js?1.0.17.014"></script>
+    <script src="/Scripts/modernizr-2.6.2.js?1.0.17.014"></script>
+    <script src="/Scripts/appcommon?v=0S9yeo1f2OE3AUuKkVAN4Vrdz3CCFaGlEjRBPgMB5mo1"></script>
+    <script src="/Scripts/jquery.cookie.js"></script>
+    <script src="/Scripts/monitor/Monitor.js?1.0.17.014"></script>
+
+
+    <script type="text/javascript">
+        var mapType = $.cookie('mapType') ? $.cookie('mapType') : 0;
+        var flds = new (function () {
+            var r = {};
+            'Trace,CmdRecord,Playback,CmdSend' && $.each('Trace,CmdRecord,Playback,CmdSend'.split(','), function (i, n) {
+                r[n] = 1;
+            });
+            return r;
+        });
+        var centerlng = '';
+        var centerlat = '';
+        var czoom = '';
+        var mapView = '120.551232420000,31.877591890,11';//地图默认显示修改：张家港
+        if (mapView) {
+            var m = mapView.split(',');
+            centerlng = m[0];
+            centerlat = m[1];
+            czoom = m[2];
+        }
+    </script>
+</head>
+<body class="hold-transition skin-blue sidebar-mini fixed">
+<div class="wrapper">
+    <!-- Main Header -->
+    <header class="main-header">
+        <a href="/home" class="logo"
+           style="background-image:url('/Content/org/logo.jpg?636513474412430000');background-position:center;background-repeat:no-repeat;background-size: contain;">
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"></span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- 后台名字ID 处    [[${session.loginUser}]]   -->
+                    <li><a href="#" id="username">[[${session.loginUser}]]</a></li>
+                    <li class="home_li">
+                        <a href="/home" title="首页">
+                            <i class="fa fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="alarm_li">
+                        <a href="#" data-toggle="modal" data-target="#alarmModal" title="报警详情">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="label label-danger">...</span>
+                        </a>
+                    </li>
+                    <li class="alarm_audio_li">
+                        <a href="#" title="打开报警声音">
+                            <i class="glyphicon glyphicon-volume-off"></i>
+                        </a>
+                        <audio style="display:none" id="alarmAudio" src="/Content/sound/alarm.mp3"></audio>
+                    </li>
+                    <li class="pwd_li">
+                        <a href="#" data-toggle="modal" data-target="#pwdModal" title="修改密码">
+                            <i class="fa fa-key"></i>
+                        </a>
+                    </li>
+                    <li class="logout_li">
+                        <a href="/Logout" title="退出">
+                            <i class="fa fa-sign-out"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <div class="sidebar" id="scrollspy">
+
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="nav sidebar-menu">
+                <!--                <li class="header">C18</li>-->
+
+                <li><a href="/home"><i class="fa fa-home"></i><span>主页</span></a></li>
+                <li class="treeview  active">
+                    <a href="#"><i class="fa fa-television"></i><span>监控管理</span><i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li class="active"><a href="#"><i class="fa fa-map-marker"></i><span>监控中心</span></a></li>
+                        <li><a href="/Fence"><i class="fa fa-slack"></i><span>围栏管理</span></a></li>
+                    </ul>
+                </li>
+                <li class="treeview ">
+                    <a href="#"><i class="fa fa-line-chart"></i><span>报表中心</span><i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="/AlarmReport"><i class="fa fa-folder-o"></i><span>报警报表</span></a></li>
+                        <li><a href="/OfflineReport"><i class="fa fa-folder-o"></i><span>离线报表</span></a></li>
+                        <li><a href="/OnlineReport"><i class="fa fa-folder-o"></i><span>在线报表</span></a></li>
+                        <li><a href="/StopReport"><i class="fa fa-folder-o"></i><span>停留报表</span></a></li>
+                        <li><a href="/MileageReport"><i class="fa fa-folder-o"></i><span>里程报表</span></a></li>
+
+                    </ul>
+                </li>
+                <li class="treeview ">
+                    <a href="#"><i class="fa fa-share-alt-square"></i><span>设备管理</span><i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="/TerminalMonitor"><i class="fa fa-tablet"></i><span>终端管理</span></a></li>
+                        <li><a href="/CarManagement"><i class="fa fa-automobile"></i><span>车辆管理</span></a></li>
+
+                    </ul>
+                </li>
+                <li class="treeview ">
+                    <a href="#"><i class="fa fa-th-large"></i><span>系统管理</span><i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="/UserManagement"><i class="fa fa-user"></i><span>用户管理</span></a></li>
+                        <li><a href="/GroupManagement"><i class="fa fa-sitemap"></i><span>组管理</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style="position:relative;">
+
+        <div id="monitor_Div" style="width:100%;height:100%;position:absolute;">
+            <div id="leftarea"
+                 style="width: 320px;float: left;height: 100%;padding-left: 10px;padding-bottom: 10px;padding-top: 10px"></div>
+            <div id="shrink"
+                 style="display: table;width: 10px;float: left;height: 100%;background-color: #ecf0f5;cursor: pointer;vertical-align: middle"></div>
+
+            <div id="mmap" style="height: 100%;overflow: hidden;">
+                <div class="RightToolBar"
+                     style="position: absolute; top: 10px; right: 120px; border-radius: 3px; overflow: hidden;z-index:9999">
+                    <div class="defaultTools_rightToolBar"
+                         style="background: rgb(255, 255, 255); float: left; margin-right: 6px; border: 1px solid rgb(196, 199, 204); cursor: pointer;">
+                        <span title="保存视角" id="btnView" class="icon-saveview icon-rightToolBar"
+                              style="float: left; height: 20px; width: 22px; border-right: 1px solid rgb(236, 237, 239);"></span>
+                        <span title="距离测量,单击确定地点,双击结束" id="btnDistance" class="icon-measure icon-rightToolBar"
+                              style="float: left; height: 20px; width: 22px; border-right: 1px solid rgb(236, 237, 239);"></span>
+                        <span title="风险点" id="btnDangerPoint" class="icon-dangerPoint icon-rightToolBar"
+                              style="float: left; height: 20px; width: 22px; border-right: 1px solid rgb(236, 237, 239);"></span>
+                        <span title="刷新设备定位信息" id="btnRefresh" class="icon-refresh icon-rightToolBar"
+                              style="float: left; height: 20px; width: 22px; border-right: 1px solid rgb(236, 237, 239);"></span>
+                    </div>
+                    <div class="defaultTools_rightToolBar"
+                         style="background: rgb(255, 255, 255); float: left; margin-right: 6px; border: 1px solid rgb(196, 199, 204); cursor: pointer;">
+                        <select id="mapSelect" style="float: left;height:20px;cursor:pointer;" title="切换地图">
+                            <option value="0">高德</option>
+                            <option value="1">百度</option>
+                        </select>
+                    </div>
+                </div>
+                <iframe style="border:0px;width:100%;height:100%" src="/map" id="mapFrame"></iframe>
+            </div>
+        </div>
+
+        <div class="d_line_marker" id="marker">
+            <div class="line_details">
+                <h2>上线详情</h2>
+                <div class="line_date">
+                    <ul class="clearfix"></ul>
+                    <span>关闭</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="pwdModal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="pwdModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="width:455px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="pwdModalLabel">修改密码</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="oldPwd">原密码</label>
+                    <input type="password" class="form-control" id="oldpwd" placeholder="原密码" name="oldpwd"
+                           datafld="oldPassword">
+                </div>
+                <div class="form-group">
+                    <label for="newPwd">新密码</label>
+                    <input type="password" class="form-control" id="newpwd" placeholder="新密码" name="password"
+                           datafld="newPassword">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPwd">确认密码</label>
+                    <input type="password" class="form-control" id="confirmpwd" placeholder="确认密码"
+                           name="confirmPassword" datafld="confirmPassword">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-default" id="btnModypwd">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

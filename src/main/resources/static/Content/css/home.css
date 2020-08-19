@@ -1,0 +1,413 @@
+.items {
+    /*font: 12px/1.5 "Lucida Grande", "Lucida Sans Unicode", Tahoma, SimSun, Helvetica, sans-serif;
+			color: #2E313A;*/
+    font-size: 12px;
+    color: #2e313a;
+}
+
+.items a {
+    color: #0e4279;
+    -moz-transition: color 0.3s ease 0s;
+}
+
+.items a:hover {
+    color: #5B636A;
+}
+
+/* 提示自定义 */
+.stateTip,
+#StateTip {
+    display: none;
+    position: absolute;
+    padding: 8px;
+    background: #fff;
+    border: 2px solid #2385B1;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: Tahoma;
+    color: #333;
+    z-index: 999;
+}
+
+.regionList {
+    float: left;
+    width: 100px;
+}
+
+.regionList ul {
+    float: left;
+    width: 110px;
+    height: 100%;
+    display: inline;
+    font-family: "微软雅黑";
+}
+
+.regionList ul li {
+    height: 24px;
+    padding: 0 0px;
+    border: 1px solid #fff;
+    line-height: 24px;
+}
+
+.regionList ul li.select {
+    border: 1px solid #D3D3D3;
+    background: #FFF1BF;
+}
+
+.mapInfo i {
+    display: inline-block;
+    width: 18px;
+    height: 15px;
+    margin-top: 5px;
+    line-height: 15px;
+    font-style: normal;
+    background: #aeaeae;
+    color: #fff;
+    font-size: 11px;
+    font-family: Tahoma;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.mapInfo i.active {
+    background: #0e4279;
+}
+
+.mapInfo span {
+    padding: 0 5px 0 3px;
+}
+
+.mapInfo b {
+    font-weight: normal;
+    color: #2770B5;
+}
+
+.regionMap {
+    float: left;
+    margin-left: 70px;
+    display: inline;
+}
+
+#RegionMap {
+    margin-left: 10px;
+    height: 266px !important;
+    width: 260px !important;
+}
+
+.distribute svg {
+    width: 260px;
+    height: 260px;
+}
+
+/*@media screen and (min-width:980px){
+ .sm .box{
+    min-width:400px;
+    margin:0px 10px
+}
+}*/
+@media screen and (min-width: 992px) and (max-width: 1300px) {
+    #RegionMap {
+        margin-left: 10px;
+        height: 200px !important;
+        width: 109px !important;
+    }
+
+    .distribute svg {
+        width: 109px;
+        height: 200px;
+    }
+}
+
+@media screen and (min-width: 1300px) and (max-width: 1500px) {
+    #RegionMap {
+        margin-left: 10px;
+        height: 200px !important;
+        width: 172px !important;
+    }
+
+    .distribute svg {
+        width: 172px;
+        height: 200px;
+    }
+}
+
+@media screen and (min-width: 1500px) and (max-width: 1700px) {
+    #RegionMap {
+        margin-left: 10px;
+        height: 200px !important;
+        width: 280px !important;
+    }
+
+    .distribute svg {
+        width: 280px;
+        height: 200px;
+    }
+}
+
+@media screen and (max-width: 532px) and (min-width: 433px) {
+    #RegionMap {
+        margin-left: 10px;
+        height: 200px !important;
+        width: 251px !important;
+    }
+
+    .distribute svg {
+        width: 251px;
+        height: 200px;
+    }
+}
+
+@media screen and (max-width: 432px) {
+    #RegionMap {
+        margin-left: 10px;
+        height: 200px !important;
+        width: 180px !important;
+    }
+
+    .distribute svg {
+        width: 180px;
+        height: 200px;
+    }
+}
+
+.sm .box {
+    height: 410px;
+    border: 1px solid #F6F6F6;
+}
+
+/*加载loading器的实现*/
+.sm .col-md-3 {
+    position: relative;
+}
+
+#preloader_5 {
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
+    line-height: 32px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -40px;
+    margin-left: -75px;
+}
+
+.spinner {
+    width: 20px;
+    height: 40px;
+    position: relative;
+    left: 60px;
+}
+
+.container1 > div, .container2 > div, .container3 > div {
+    width: 6px;
+    height: 6px;
+    background-color: #00BFFF;
+    border-radius: 100%;
+    position: absolute;
+    -webkit-animation: bouncedelay 1.2s infinite ease-in-out;
+    animation: bouncedelay 1.2s infinite ease-in-out;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.spinner .spinner-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.container2 {
+    -webkit-transform: rotateZ(45deg);
+    transform: rotateZ(45deg);
+}
+
+.container3 {
+    -webkit-transform: rotateZ(90deg);
+    transform: rotateZ(90deg);
+}
+
+.circle1 {
+    top: 0;
+    left: 0;
+}
+
+.circle2 {
+    top: 0;
+    right: 0;
+}
+
+.circle3 {
+    right: 0;
+    bottom: 0;
+}
+
+.circle4 {
+    left: 0;
+    bottom: 0;
+}
+
+.container2 .circle1 {
+    -webkit-animation-delay: -1.1s;
+    animation-delay: -1.1s;
+}
+
+.container3 .circle1 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+.container1 .circle2 {
+    -webkit-animation-delay: -0.9s;
+    animation-delay: -0.9s;
+}
+
+.container2 .circle2 {
+    -webkit-animation-delay: -0.8s;
+    animation-delay: -0.8s;
+}
+
+.container3 .circle2 {
+    -webkit-animation-delay: -0.7s;
+    animation-delay: -0.7s;
+}
+
+.container1 .circle3 {
+    -webkit-animation-delay: -0.6s;
+    animation-delay: -0.6s;
+}
+
+.container2 .circle3 {
+    -webkit-animation-delay: -0.5s;
+    animation-delay: -0.5s;
+}
+
+.container3 .circle3 {
+    -webkit-animation-delay: -0.4s;
+    animation-delay: -0.4s;
+}
+
+.container1 .circle4 {
+    -webkit-animation-delay: -0.3s;
+    animation-delay: -0.3s;
+}
+
+.container2 .circle4 {
+    -webkit-animation-delay: -0.2s;
+    animation-delay: -0.2s;
+}
+
+.container3 .circle4 {
+    -webkit-animation-delay: -0.1s;
+    animation-delay: -0.1s;
+}
+
+@-webkit-keyframes bouncedelay {
+    0%, 80%, 100% {
+        -webkit-transform: scale(0.0)
+    }
+    40% {
+        -webkit-transform: scale(1.0)
+    }
+}
+
+@keyframes bouncedelay {
+    0%, 80%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    }
+    40% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+    }
+}
+
+.barLine .number, .offLine .number {
+    width: 160px;
+    margin: 0 auto
+}
+
+.number span {
+    color: #EE2C2C;
+    font-size: 16px
+}
+
+.sm .col-md-3 {
+    padding: 0
+}
+
+.box-header.with-border {
+    border-bottom: solid 1px #f6f6f6;
+    background: #f6f6f6;
+}
+
+.row.sm {
+    padding: 0px 0px 0px 40px;
+}
+
+.box-body {
+    padding: 0 !important;
+    height: 95%;
+
+}
+
+.box-body.pie {
+    margin-top: 20px
+}
+
+.pie #device_abnormal {
+    width: 20px;
+    height: 10px;
+}
+
+.pie .deviceInfomargion {
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.pie #info_abnormal #device_abnormal {
+    background-color: #9CD6EC;
+}
+
+.pie #info_abnormal:hover {
+    color: #9CD6EC
+}
+
+.pie #info_focuson #device_abnormal {
+    background-color: #FF9900;
+}
+
+.pie #info_focuson:hover {
+    color: #FF9900
+}
+
+.pie #info_offline #device_abnormal {
+    background-color: #F4E33C;
+}
+
+.pie #info_offline:hover {
+    color: #F4E33C
+}
+
+.pie #info_overdue #device_abnormal {
+    background-color: #A7CB07;
+}
+
+.pie #info_overdue:hover {
+    color: #A7CB07
+}
+
+.pie .pietoRight #lab_activeddevice {
+    color: #57D2D3 !important;
+    font-weight: bold !important;
+}
+
+.pie .pietoRight #lab_totaldevice {
+    color: #B92C2C !important;
+    font-weight: bold !important;
+}
+ 

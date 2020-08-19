@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.car.mapper.MileageReportMapper">
+
+    <!--查询-->
+    <select id="getMileageListFormMap" parameterType="map" resultType="com.car.domain.Mileage">
+        select * from mileage_report
+        <where>
+            <if test="Key!=null">
+                dev_number=#{Key}
+            </if>
+
+            <if test="OrgId!=null">
+                and group_id=#{OrgId}
+            </if>
+
+            <if test="CataId!=null">
+                and catalogue_id=#{CataId}
+            </if>
+
+
+
+            <if test="ModelType!=null and ModelType!='' ">
+                and model_type=#{ModelType}
+            </if>
+
+            <if test="StartTime!=null and EndTime!=null">
+                and stroke_date <![CDATA[>]]> #{StartTime} and stroke_date  <![CDATA[<]]>  #{EndTime}
+            </if>
+        </where>
+        limit #{start},#{limit}
+    </select>
+
+
+    <!--插入-->
+    <insert id="insertMileage" parameterType="com.car.domain.Mileage">
+        insert into bdswebplatform.mileage_report(group_id, group_name, dev_name, dev_number, model_type, model_type_name,cata_name, lng, lat, lnglat, location_time, receive_time,mileage,stroke_date)
+        values (#{group_id}, #{group_name}, #{dev_name}, #{dev_number}, #{model_type},#{model_type_name},#{cata_name}, #{lng}, #{lat}, #{lnglat}, #{location_time}, #{receive_time},#{mileage},#{stroke_date})
+    </insert>
+
+    <insert id="insertMileageForEach" parameterType="java.util.List" useGeneratedKeys="true">
+        insert into bdswebplatform.mileage_report(group_id, user_id, group_name, dev_name, dev_number,
+        cata_name,catalogue_id, lng, lat, lnglat,model_type,model_type_name,location_time,receive_time,mileage,stroke_date)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.group_id},
+            #{item.user_id},
+            #{item.group_name},
+            #{item.dev_name},
+            #{item.dev_number},
+            #{item.cata_name},
+            #{item.catalogue_id},
+            #{item.lng},
+            #{item.lat},
+            #{item.lnglat},
+            #{item.model_type},
+            #{item.model_type_name},
+            #{item.location_time},
+            #{item.receive_time},
+            #{item.mileage},
+            #{item.stroke_date}
+            )
+        </foreach>
+    </insert>
+
+
+</mapper>

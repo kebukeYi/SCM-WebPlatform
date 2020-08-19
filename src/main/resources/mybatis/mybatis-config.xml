@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--    <settings>-->
+    <!--        &lt;!&ndash;        <setting name="mapUnderscoreToCamelCase" value="true"/>&ndash;&gt;-->
+    <!--    </settings>-->
+
+    <mappers>
+<!--        <mapper resource="mybatis/mapper/OnlineReportMapper.xml"></mapper>-->
+<!--        <mapper resource="mybatis/mapper/StopReportMapper.xml"></mapper>-->
+<!--        <mapper resource="mybatis/mapper/AlarmReportMapper.xml"></mapper>-->
+<!--        <mapper resource="mybatis/mapper/CarManagementMapper.xml"></mapper>-->
+<!--        <mapper resource="mybatis/mapper/MileageReportMapper.xml"></mapper>-->
+<!--        <mapper resource="mybatis/mapper/OfflineReportMapper.xml"></mapper>-->
+<!--        <mapper resource="mybatis/mapper/TerminalMapper.xml"></mapper>-->
+
+    </mappers>
+</configuration>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

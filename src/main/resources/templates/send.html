@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>后台管理</title>
+    <link href="/css/login.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<div class="login_box">
+    <div class="login_l_img"><img src="/images/send.png"/></div>
+    <div class="login">
+        <div class="login_logo"><a href="#"><img src="/images/login_logo.png"/></a></div>
+        <div class="login_name">
+            <p>设备后台管理系统</p>
+        </div>
+        <form method="post" action="/isLogin">
+            <!-- <label>-->
+            <!-- <input checked="True" data-val="true" data-val-number="字段 UserType 必须是一个数字。" data-val-required="UserType 字段是必需的。" id="usertype0" name="UserType" style="background-color:red" type="radio" value="0" /> 帐号-->
+            <!--   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+            <!--&lt;!&ndash;                <input id="usertype1" name="UserType" style="background-color:red" type="radio" value="1" /> IMEI&ndash;&gt;-->
+            <!--            </label>-->
+            <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+            <input name="deviceId" type="text" value="" placeholder="设备ID" required="required"/>
+            <!-- <span id="password_text" onclick="this.style.display='none';document.getElementById('password').style.display='block';document.getElementById('password').focus().select();">密码</span>-->
+            <input name="ctrl" type="text" value="" placeholder="指令" required="required"/>
+            <!-- <input id="remember-me" name="remember" style="background-color:red" type="checkbox" value="1" checked="True" />记住我-->
+            <input value="发送" style="width:100%;" type="submit">
+        </form>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="copyright">
+    </div>
+</div>
+<div style="text-align:center;">
+    <!--<p>更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>-->
+</div>
+</body>
+</html>

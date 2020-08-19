@@ -1,0 +1,469 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <title>首页-Index</title>
+    <link href="/Content/bootstrap.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/common.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/bootstrapValidator.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/font-awesome.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/css/AdminLTE.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/jquery-confirm.min.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/css/skins/_all-skins.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+    <link href="/Content/ztree/zTreeStyle/zTreeStyle.css?1.0.17.014" rel="stylesheet" type="text/css">
+    <link href="/Content/buttons.dataTables.min.css?1.0.17.014" rel="stylesheet" type="text/css">
+    <link href="/Content/dataTables.bootstrap.min.css?1.0.17.014" rel="stylesheet" type="text/css">
+    <link href="/Content/css/home.css?1.0.17.014" rel="stylesheet" type="text/css"/>
+
+    <script src="/Scripts/jquery-1.10.2.min.js?1.0.17.014"></script>
+    <script src="/Scripts/jquery.slimscroll.min.js?1.0.17.014"></script>
+    <script src="/Scripts/jquery-confirm.min.js?1.0.17.014"></script>
+    <script src="/Scripts/jquery.dataTables.min.js?1.0.17.014"></script>
+    <script src="/Scripts/bootstrap.js?1.0.17.014"></script>
+    <script src="/Scripts/Validator/bootstrapValidator.js?1.0.17.014"></script>
+    <script src="/Scripts/dataTables.bootstrap.min.js?1.0.17.014"></script>
+    <script src="/Scripts/modernizr-2.6.2.js?1.0.17.014"></script>
+
+    <script src="/Scripts/app/ip.js"></script>
+    <script src="/Scripts/appcommon?v=0S9yeo1f2OE3AUuKkVAN4Vrdz3CCFaGlEjRBPgMB5mo1"></script>
+    <script type="text/javascript" src="/Scripts/Chart.min.js?1.0.17.014"></script>
+    <script type="text/javascript" src="/Scripts/app/home.js?1.0.17.014"></script>
+    <script type="text/javascript" src="/Scripts/svg/chinaMapConfig.js?1.0.17.014"></script>
+    <script type="text/javascript" src="/Scripts/svg/raphael-min.js?1.0.17.014"></script>
+    <script type="text/javascript" src="/Scripts/svg/map.js?1.0.17.014"></script>
+
+    <script type="text/javascript">
+        var flds = new (function () {
+            var r = {};
+            '' && $.each(''.split(','), function (i, n) {
+                r[n] = 1;
+            });
+            return r;
+        });
+        var centerlng = '';
+        var centerlat = '';
+        var czoom = '';
+        var mapView = '';
+        if (mapView) {
+            var m = mapView.split(',');
+            centerlng = m[0];
+            centerlat = m[1];
+            czoom = m[2];
+        }
+    </script>
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini fixed">
+<div class="wrapper">
+    <!-- Main Header -->
+    <header class="main-header">
+        <a href="/index" class="logo"
+           style="background-image:url('/Content/org/logo.jpg?636513474412430000');background-position:center;background-repeat:no-repeat;background-size: contain;">
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"></span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- 后台名字ID 处    [[${session.loginUser}]]   -->
+                    <li><a href="#" id="username">[[${session.loginUser}]]</a></li>
+                    <li class="home_li">
+                        <a href="/index" title="首页">
+                            <i class="fa fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="alarm_li">
+                        <a href="#" data-toggle="modal" data-target="#alarmModal" title="报警详情">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="label label-danger">...</span>
+                        </a>
+                    </li>
+                    <li class="alarm_audio_li">
+                        <a href="#" title="打开报警声音">
+                            <i class="glyphicon glyphicon-volume-off"></i>
+                        </a>
+                        <audio style="display:none" id="alarmAudio" src="/Content/sound/alarm.mp3"></audio>
+                    </li>
+                    <li class="pwd_li">
+                        <a href="#" data-toggle="modal" data-target="#pwdModal" title="修改密码">
+                            <i class="fa fa-key"></i>
+                        </a>
+                    </li>
+                    <li class="logout_li">
+                        <a href="/Logout" title="退出">
+                            <i class="fa fa-sign-out"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <div class="sidebar" id="scrollspy">
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="nav sidebar-menu">
+<!--   <li class="header">C18</li>-->
+                <li><a href="/index"><i class="fa fa-home"></i><span>主页</span></a></li>
+                <li class="treeview ">
+                    <a href="#"><i class="fa fa-television"></i><span>监控管理</span><i
+                            class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="/monitor"><i class="fa fa-map-marker"></i><span>监控中心</span></a></li>
+                        <li><a href="/Fence"><i class="fa fa-slack"></i><span>围栏管理</span></a></li>
+                        <li><a href="/TerminalMonitor"><i class="fa fa-mobile"></i><span>终端监控</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style="position:relative;">
+        <section class="content-header">
+            <h1>首页</h1>
+        </section>
+        <section class="content">
+            <div class="row sm">
+                <div class="col-md-4">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">在线统计</h3>
+                        </div>
+                        <div class="box-body">
+                            <canvas id="pieChart" width="250" height="125"></canvas>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">有线离线</h3>
+                        </div>
+                        <div class="box-body barLine">
+                            <div class="number">总数 : <span></span></div>
+                            <canvas id="barLine" width="250" height="125"></canvas>
+                            <div id="preloader_5">
+                                <div class="spinner">
+                                    <div class="spinner-container container1">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                    <div class="spinner-container container2">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                    <div class="spinner-container container3">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">无线离线</h3>
+                        </div>
+                        <div class="box-body offLine">
+                            <div class="number">总数 : <span></span></div>
+                            <canvas id="offLine" width="250" height="125"></canvas>
+                            <div id="preloader_5">
+                                <div class="spinner">
+                                    <div class="spinner-container container1">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                    <div class="spinner-container container2">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                    <div class="spinner-container container3">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">分布统计(top10)</h3>
+                        </div>
+                        <div class="box-body distribute">
+                            <div class="items" id="Item9">
+                                <a href="javascript:;" class="fold"></a>
+                                <div class="itemCon">
+                                    <div id="Region" style="position:relative;">
+                                        <div class="regionList" id="MapControl">
+                                            <ul class="list1"></ul>
+                                            <ul class="list2"></ul>
+                                            <ul class="list3"></ul>
+                                        </div>
+                                        <div class="regionMap" id="RegionMap"></div>
+                                        <!--<div id="MapColor" style=" display:none; float:left; width:30px; height:180px; margin:80px 0 0 10px; display:inline; background:url(images/map_color.png) center 0;"></div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="preloader_5">
+                                <div class="spinner">
+                                    <div class="spinner-container container1">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                    <div class="spinner-container container2">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                    <div class="spinner-container container3">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">报警统计</h3>
+                        </div>
+                        <div class="box-body police">
+                            <canvas id="lineChart" width="250" height="125"></canvas>
+                            <div id="preloader_5">
+                                <div class="spinner">
+                                    <div class="spinner-container container1">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                    <div class="spinner-container container2">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                    <div class="spinner-container container3">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">无线上线</h3>
+                        </div>
+                        <div class="box-body onLine">
+                            <div class="number">总数 : <span></span></div>
+                            <canvas id="onLine" width="250" height="125"></canvas>
+                            <div id="preloader_5">
+                                <div class="spinner">
+                                    <div class="spinner-container container1">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                    <div class="spinner-container container2">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                    <div class="spinner-container container3">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">增量统计</h3>
+                        </div>
+                        <div class="box-body increment">
+                            <canvas id="incrementChart" width="250" height="125"></canvas>
+                            <div id="preloader_5">
+                                <div class="spinner">
+                                    <div class="spinner-container container1">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                    <div class="spinner-container container2">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                    <div class="spinner-container container3">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">用户增量统计</h3>
+                        </div>
+                        <div class="box-body userIncrement">
+                            <canvas id="userIncrementChart" width="250" height="125"></canvas>
+                            <div id="preloader_5">
+                                <div class="spinner">
+                                    <div class="spinner-container container1">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                    <div class="spinner-container container2">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                    <div class="spinner-container container3">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">到期统计</h3>
+                        </div>
+                        <div class="box-body expireDate">
+                            <canvas id="expireDateChart" width="250" height="125"></canvas>
+                            <div id="preloader_5">
+                                <div class="spinner">
+                                    <div class="spinner-container container1">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                    <div class="spinner-container container2">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                    <div class="spinner-container container3">
+                                        <div class="circle1"></div>
+                                        <div class="circle2"></div>
+                                        <div class="circle3"></div>
+                                        <div class="circle4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="pwdModal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="pwdModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="width:455px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="pwdModalLabel">修改密码</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="oldPwd">原密码</label>
+                    <input type="password" class="form-control" id="oldpwd" placeholder="原密码" name="oldpwd"
+                           datafld="oldPassword">
+                </div>
+                <div class="form-group">
+                    <label for="newPwd">新密码</label>
+                    <input type="password" class="form-control" id="newpwd" placeholder="新密码" name="password"
+                           datafld="newPassword">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPwd">确认密码</label>
+                    <input type="password" class="form-control" id="confirmpwd" placeholder="确认密码"
+                           name="confirmPassword" datafld="confirmPassword">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-default" id="btnModypwd">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
